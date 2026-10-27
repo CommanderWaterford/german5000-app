@@ -1,0 +1,9 @@
+{
+  "packId": "german5000",
+  "contentVersion": "0.1.0-pilot",
+  "languageId": "de-DE",
+  "freeEntryLimit": 20,
+  "bandSize": 10,
+  "rankSource": "placeholder",
+  "rightsManifestId": "german5000-rights-pilot"
+}

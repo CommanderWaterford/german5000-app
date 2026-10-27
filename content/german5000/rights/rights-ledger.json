@@ -1,0 +1,33 @@
+{
+  "rightsManifestId": "german5000-rights-pilot",
+  "note": "Rights ledger (spec §5.4). Every shipped asset class needs a cleared record before a release build.",
+  "records": [
+    {
+      "rightsId": "claude-drafted-pending-rights-review",
+      "assetClasses": ["definitions", "examples", "translations", "grammar"],
+      "owner": "German5000 product owner (to confirm)",
+      "license": "pending",
+      "commercialUse": "pending",
+      "redistribution": "pending",
+      "attribution": "none required (to confirm)",
+      "evidence": "Drafted with AI assistance for the 50-entry engineering pilot. Not reviewed by a German editor. Must not ship.",
+      "status": "pending"
+    },
+    {
+      "rightsId": "frequency-source-unselected",
+      "assetClasses": ["frequency ranks"],
+      "owner": "unselected",
+      "license": "pending procurement (spec §5.2; Leipzig Corpora Collection is a candidate only)",
+      "commercialUse": "pending",
+      "redistribution": "pending",
+      "status": "pending"
+    },
+    {
+      "rightsId": "audio-unrecorded",
+      "assetClasses": ["word audio", "example audio"],
+      "owner": "unselected",
+      "license": "pending",
+      "status": "pending"
+    }
+  ]
+}
