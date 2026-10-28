@@ -213,6 +213,7 @@ class CommandTest(unittest.TestCase):
                 tp.main(["--pack", str(path), "--work", tmp, "produce", "--backend", "fake", "--voice", "x"])
             self.assertIn("fake backend", str(ctx.exception))
 
+    @unittest.skipUnless(has_encoder(), "needs FFmpeg or afconvert")
     def test_large_google_runs_need_confirmation(self):
         texts = [f"Satz Nummer {i} mit genug Text, um teuer zu werden." * 3 for i in range(300)]
         records, entries = [], []
