@@ -17,8 +17,9 @@ German content (`content/german5000`).
 
 > **Status:** engineering baseline with **4,010 ranked entries imported from the supplied
 > German workbook**, one example sentence per entry, draft English translations and grammar.
-> The original 50 enriched pilot entries retain their IDs. Content is unreviewed,
-> unrecorded and pending rights review. Release builds refuse to package it.
+> The original 50 enriched pilot entries retain their IDs. Every entry has synthetic word
+> and example audio (Google Cloud TTS, see [tools/tts](tools/tts/README.md)). Content and audio
+> are unreviewed and pending rights review. Release builds refuse to package it.
 
 ## Requirements
 

@@ -54,10 +54,17 @@
       "status": "pending"
     },
     {
-      "rightsId": "audio-unrecorded",
+      "rightsId": "audio-google-tts-pending-review",
       "assetClasses": ["word audio", "example audio"],
-      "owner": "unselected",
-      "license": "pending",
+      "label": "Synthetic speech generated with Google Cloud Text-to-Speech. Not a human or native-speaker recording, and must not be described as one (spec §6.1).",
+      "source": "Google Cloud Text-to-Speech API v1, voice de-DE-Wavenet-G (WaveNet, female, de-DE), plain-text input from each audio record's spokenText, no SSML or pronunciation overrides. LINEAR16 masters at the voice's natural 24 kHz, speaking rate 1.0; trimmed (100 ms lead, 150 ms tail kept), normalized to -18 LUFS integrated with true peak at or below -1 dBTP, delivered as mono AAC-LC 48 kbps M4A (encoder: macOS afconvert). Settings: tools/tts/tts-settings.json.",
+      "owner": "German5000 product owner, as generated output under the product owner's Google Cloud account (to confirm)",
+      "license": "Google Cloud Terms of Service and Service Specific Terms; Google documents that generated audio may be used in applications subject to its terms. Confirm the current terms text and version before release.",
+      "licenseUrl": "https://cloud.google.com/terms/service-terms",
+      "commercialUse": "pending terms review",
+      "redistribution": "pending terms review (all clips are bundled in the APK)",
+      "attribution": "none known (to confirm)",
+      "evidence": "Produced 2026-10-28, 10:58-12:04 UTC, with tools/tts/tts_production.py: 8,020 clips (4,010 word, 4,010 example) from 7,811 synthesis requests, 0 errors; every clip verified for codec, duration and SHA-256 checksum. Voice chosen after a 100-entry pilot audition. The per-clip ledger (spoken text and hash, voice, settings, date, final SHA-256, duration, loudness, review status) and the lossless masters are in work/tts/, which is not in the repository and must be archived. Usage terms: https://docs.cloud.google.com/text-to-speech/quotas. Native German review pending for all 8,020 clips.",
       "status": "pending"
     }
   ]
