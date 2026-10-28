@@ -44,11 +44,12 @@ object GermanGrammarRenderer : GrammarRenderer {
 
     override fun headline(entry: Entry): String {
         val g = entry.grammar
+        if (entry.pos == PartOfSpeech.NOUN && g[G.PLURAL_STATUS] != "plural_only" && g.value(G.ARTICLE) == null) return entry.lemma
         return when (entry.pos) {
             PartOfSpeech.NOUN -> when (g[G.PLURAL_STATUS]) {
                 "plural_only" -> "die ${entry.lemma} (plural only)"
                 "no_plural" -> "${g[G.ARTICLE]} ${entry.lemma} · no plural"
-                else -> "${g[G.ARTICLE]} ${entry.lemma} · die ${g[G.PLURAL]}"
+                else -> listOfNotNull("${g[G.ARTICLE]} ${entry.lemma}", g.value(G.PLURAL)?.let { "die $it" }).joinToString(" · ")
             }
             PartOfSpeech.VERB -> citationForm(entry)
             else -> entry.lemma
@@ -58,7 +59,7 @@ object GermanGrammarRenderer : GrammarRenderer {
     override fun citationForm(entry: Entry): String {
         val g = entry.grammar
         return when (entry.pos) {
-            PartOfSpeech.NOUN -> if (g[G.PLURAL_STATUS] == "plural_only") "die ${entry.lemma}" else "${g[G.ARTICLE]} ${entry.lemma}"
+            PartOfSpeech.NOUN -> if (g[G.PLURAL_STATUS] == "plural_only") "die ${entry.lemma}" else listOfNotNull(g.value(G.ARTICLE), entry.lemma).joinToString(" ")
             PartOfSpeech.VERB -> if (g[G.REFLEXIVE] == "required") "sich ${entry.lemma}" else entry.lemma
             else -> entry.lemma
         }
@@ -86,10 +87,10 @@ object GermanGrammarRenderer : GrammarRenderer {
                 val aux = g.value(G.AUXILIARY)
                 add("Present (er/sie/es)", g.value(G.PRESENT_3SG))
                 add("Preterite", g.value(G.PRETERITE))
-                val auxForm = aux?.split("|")?.joinToString("/") { if (it == "sein") "ist" else "hat" } ?: "hat"
-                add("Perfect", g.value(G.PARTICIPLE_2)?.let { "$auxForm $it" })
+                val auxForm = aux?.split("|")?.joinToString("/") { if (it == "sein") "ist" else "hat" }
+                add("Perfect", g.value(G.PARTICIPLE_2)?.let { if (auxForm == null) it else "$auxForm $it" })
                 add("Auxiliary", aux?.replace("|", " or "))
-                add("Separable", g.value(G.SEPARABLE_PREFIX)?.let { "yes ($it-)" } ?: "no")
+                if (G.SEPARABLE_PREFIX in g) add("Separable", g.value(G.SEPARABLE_PREFIX)?.let { "yes ($it-)" } ?: "no")
                 when (g[G.REFLEXIVE]) {
                     "required" -> add("Reflexive", "always with sich")
                     "optional" -> add("Reflexive", "sometimes with sich")
@@ -117,7 +118,7 @@ object GermanGrammarRenderer : GrammarRenderer {
         else -> "+ " + value.replace("|", " or ")
     }
 
-    override fun partOfSpeechLabel(pos: PartOfSpeech): String = pos.name.lowercase(Locale.ENGLISH)
+    override fun partOfSpeechLabel(pos: PartOfSpeech): String = if (pos == PartOfSpeech.UNSPECIFIED) "word" else pos.name.lowercase(Locale.ENGLISH)
 }
 
 object GermanExerciseProvider : ExerciseProvider {
@@ -169,12 +170,12 @@ object GermanExerciseProvider : ExerciseProvider {
                 }
                 val plural = g.value(G.PLURAL)
                 if (g[G.PLURAL_STATUS] == "has_plural" && plural != null) {
-                    typed("Type the plural (without article)", "$article ${entry.lemma} → die …", plural, "die $plural")
+                    typed("Type the plural (without article)", "${GermanGrammarRenderer.citationForm(entry)} → die …", plural, "die $plural")
                 }
             }
             PartOfSpeech.VERB -> {
                 val aux = g.value(G.AUXILIARY)
-                if (aux == "haben" || aux == "sein") {
+                if ((aux == "haben" || aux == "sein") && g.value(G.PARTICIPLE_2) != null) {
                     choice("Which auxiliary forms the perfect?", "${entry.lemma} ($gloss)", listOf("haben", "sein"), aux, "Perfect: ${if (aux == "haben") "hat" else "ist"} ${g[G.PARTICIPLE_2]}")
                 }
                 g.value(G.PARTICIPLE_2)?.let { typed("Type the participle II", "${entry.lemma} → hat/ist …", it, "Participle II: $it") }
@@ -194,7 +195,7 @@ object GermanExerciseProvider : ExerciseProvider {
                 }
             }
             PartOfSpeech.ADJECTIVE -> g.value(G.COMPARATIVE)?.takeIf { g[G.GRADABLE] != "false" }?.let {
-                typed("Type the comparative", "${entry.lemma} ($gloss)", it, "${entry.lemma} → $it → ${g[G.SUPERLATIVE]}")
+                typed("Type the comparative", "${entry.lemma} ($gloss)", it, listOfNotNull(entry.lemma, it, g.value(G.SUPERLATIVE)).joinToString(" → "))
             }
             else -> Unit
         }

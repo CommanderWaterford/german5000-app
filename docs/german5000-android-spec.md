@@ -180,7 +180,7 @@ Leipzig Corpora Collection is a candidate for evaluation, not an approved conten
 | Adjectives | Comparative/superlative or explicit non-gradable status; spelling/stem irregularities |
 | Prepositions | Governed case(s); distinguish two-way location/direction usage with reviewed examples |
 | Pronouns/determiners | Relevant gender/case/number forms or a linked mini-table |
-| Examples | At least one original or explicitly licensed natural German sentence, English translation, sense association, target span, and primary-example audio |
+| Examples | Exactly one original or explicitly licensed natural German sentence per entry, English translation, sense association, target span, and example audio |
 | Pronunciation | Reviewed word audio; IPA optional but, when present, must be checked |
 | Editorial metadata | Source/license IDs, reviewers, status, version, register/region, optional editorial CEFR tag |
 

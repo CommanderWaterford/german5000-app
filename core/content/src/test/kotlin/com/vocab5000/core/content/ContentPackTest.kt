@@ -70,6 +70,33 @@ class ContentPackTest {
         assertTrue(e.errors.any { "not approved" in it })
     }
 
+    @Test fun rejectsMultipleExamplesAndUnreviewedAssessmentContent() {
+        val dto = PackFormat.decode(packJson(adverbs))
+        val first = dto.entries.first()
+        val multiple = dto.copy(entries = listOf(first.copy(examples = first.examples + first.examples.first())) + dto.entries.drop(1))
+        val error = runCatching { ContentPack.load(PackFormat.encode(multiple), GermanLanguagePack) }.exceptionOrNull() as ContentValidationException
+        assertTrue(error.errors.any { "exactly one example" in it })
+        val unreviewed = dto.copy(entries = listOf(first.copy(corpusDraft = true)) + dto.entries.drop(1))
+        val assessmentError = runCatching { ContentPack.load(PackFormat.encode(unreviewed), GermanLanguagePack) }.exceptionOrNull() as ContentValidationException
+        assertTrue(assessmentError.errors.any { "assessment eligible" in it })
+    }
+
+    @Test fun draftsWithMissingTargetsStayPilotOnly() {
+        val dto = PackFormat.decode(packJson(adverbs))
+        val first = dto.entries.first().copy(
+            corpusDraft = true, assessmentEligible = false,
+            examples = dto.entries.first().examples.map { it.copy(targetSpanCodepoints = emptyList()) },
+        )
+        val draft = dto.copy(entries = listOf(first) + dto.entries.drop(1))
+        assertEquals(4, ContentPack.load(PackFormat.encode(draft), GermanLanguagePack).entries.size)
+        val error = runCatching { ContentPack.load(PackFormat.encode(draft), GermanLanguagePack, requireRelease = true) }.exceptionOrNull() as ContentValidationException
+        assertTrue(error.errors.any { "corpus draft needs linguistic review" in it })
+        assertTrue(error.errors.any { "has no target span" in it })
+        val incomplete = draft.copy(entries = listOf(first.copy(pos = "NOUN")) + dto.entries.drop(1))
+        val grammarError = runCatching { ContentPack.load(PackFormat.encode(incomplete), GermanLanguagePack) }.exceptionOrNull() as ContentValidationException
+        assertTrue(grammarError.errors.any { "missing grammar field" in it })
+    }
+
     @Test fun catalogLocksAndCandidates() {
         val catalog = StudyCatalog(ContentPack.load(packJson(adverbs), GermanLanguagePack), GermanLanguagePack)
         assertEquals(listOf("de.adv.hier.01", "de.adv.heute.01"), catalog.newCandidates(emptySet(), premium = false, startBand = 1, limit = 10))

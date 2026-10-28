@@ -31,6 +31,12 @@ class GermanLanguagePackTest {
         assertEquals("der Tisch", GermanGrammarRenderer.citationForm(tisch))
     }
 
+    @Test fun pluralOnlyNounDoesNotRequireAnExplicitArticle() {
+        val leute = entry("Leute", PartOfSpeech.NOUN, mapOf("pluralStatus" to "plural_only"))
+        assertEquals("die Leute (plural only)", GermanGrammarRenderer.headline(leute))
+        assertEquals("die Leute", GermanGrammarRenderer.citationForm(leute))
+    }
+
     @Test fun articleIsOptionalButMustBeCorrect() {
         val spec = GermanExerciseProvider.recallAnswerSpec(tisch, tisch.primarySense)
         assertEquals(AnswerVerdict.CORRECT, evaluator.evaluate("Tisch", spec).verdict)
@@ -69,6 +75,20 @@ class GermanLanguagePackTest {
         val lines = GermanGrammarRenderer.grammarLines(gehen).associate { it.label to it.value }
         assertEquals("ist gegangen", lines["Perfect"])
         assertEquals("no", lines["Separable"])
+    }
+
+    @Test fun incompleteDraftGrammarDoesNotInventFactsOrDisplayNull() {
+        val noun = tisch.copy(grammar = emptyMap(), corpusDraft = true, assessmentEligible = false)
+        assertEquals("Tisch", GermanGrammarRenderer.headline(noun))
+        assertEquals("Tisch", GermanGrammarRenderer.citationForm(noun))
+        assertTrue(GermanGrammarRenderer.grammarLines(noun).isEmpty())
+        val verb = entry("gehen", PartOfSpeech.VERB, mapOf("participle2" to "gegangen"))
+        val lines = GermanGrammarRenderer.grammarLines(verb).associate { it.label to it.value }
+        assertEquals("gegangen", lines["Perfect"])
+        assertFalse("Separable" in lines)
+        assertTrue(GermanExerciseProvider.grammarPrompts(verb, 1).all {
+            it is com.vocab5000.core.model.TypedPrompt && !it.explanation.contains("null")
+        })
     }
 
     @Test fun validatorFlagsMissingAndInconsistentGrammar() {

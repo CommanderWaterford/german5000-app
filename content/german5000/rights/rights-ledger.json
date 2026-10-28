@@ -3,6 +3,37 @@
   "note": "Rights ledger (spec §5.4). Every shipped asset class needs a cleared record before a release build.",
   "records": [
     {
+      "rightsId": "german-workbook-pending-review",
+      "assetClasses": ["frequency ranks", "German headwords", "German examples"],
+      "source": "User-supplied german_words.xlsx, 4,010 ranked rows; SHA-256 recorded in source/corpus-import.json",
+      "owner": "Workbook source owner (to confirm)",
+      "license": "pending",
+      "commercialUse": "pending",
+      "redistribution": "pending",
+      "evidence": "Imported on 2026-10-28. The workbook supplies no underlying corpus or licensing evidence. Clear source typos were corrected with original headwords retained as aliases. One missing example was drafted with AI assistance.",
+      "status": "pending"
+    },
+    {
+      "rightsId": "wiktionary-grammar-pending-review",
+      "assetClasses": ["grammar", "part of speech", "occasional English glosses"],
+      "owner": "English Wiktionary contributors",
+      "source": "https://kaikki.org/dictionary/German/",
+      "license": "CC BY-SA 4.0; attribution and adaptation review pending",
+      "licenseUrl": "https://en.wiktionary.org/wiki/Wiktionary:Copyrights",
+      "attribution": "Per-word Wiktionary URLs in entry notes; app Settings → Licences and attribution credits contributors and Kaikki/Wiktextract, links the licence, and identifies automated adaptations.",
+      "evidence": "Kaikki export extracted 2026-10-25 from English Wiktionary dump 2026-10-01. Grammar facts mapped to app fields; short glosses used for unchanged/ambiguous translations and corrected headwords. Manual draft overrides fill prepositions, abbreviations, plural-only and uncountable nouns, and inflected headwords.",
+      "status": "pending"
+    },
+    {
+      "rightsId": "machine-translation-pending-review",
+      "assetClasses": ["English meanings", "English example translations"],
+      "owner": "to confirm",
+      "source": "Google Translate, German to English, generated 2026-10-28",
+      "license": "pending terms review",
+      "evidence": "Automated draft translations, cached in source/corpus-enrichment.json. No runtime translation service or network dependency is added to the app.",
+      "status": "pending"
+    },
+    {
       "rightsId": "claude-drafted-pending-rights-review",
       "assetClasses": ["definitions", "examples", "translations", "grammar"],
       "owner": "German5000 product owner (to confirm)",

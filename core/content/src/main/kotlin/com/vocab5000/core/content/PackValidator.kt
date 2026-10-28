@@ -66,15 +66,24 @@ class PackValidator(private val languagePack: LanguagePack) {
             }
             if (entry.senses.none { it.senseId == entry.primarySenseId }) errors += "$where: primarySenseId ${entry.primarySenseId} not found"
             languagePack.grammarValidator.validate(entry).forEach { errors += "$where: $it" }
+            if (entry.corpusDraft && (entry.assessmentEligible || entry.editorialStatus.shippableInRelease)) {
+                errors += "$where: corpus drafts cannot be assessment eligible or approved"
+            }
+            if (release && entry.corpusDraft) errors += "$where: corpus draft needs linguistic review"
+            if (release && entry.pos == com.vocab5000.core.model.PartOfSpeech.UNSPECIFIED) errors += "$where: part of speech is unspecified"
 
-            if (entry.examples.isEmpty()) errors += "$where: needs at least one example"
+            if (entry.examples.size != 1) errors += "$where: needs exactly one example sentence"
             if (entry.examples.none { it.senseId == entry.primarySenseId }) warnings += "$where: no example for the primary sense"
             val senseIds = entry.senses.map { it.senseId }.toSet()
             entry.examples.forEach { ex ->
                 if (ex.senseId !in senseIds) errors += "$where: example ${ex.exampleId} references unknown sense ${ex.senseId}"
                 if (!isNfc(ex.textDe)) errors += "$where: example ${ex.exampleId} is not NFC"
                 if (ex.textEn.isBlank()) errors += "$where: example ${ex.exampleId} lacks a translation"
-                if (ex.targetSpans.isEmpty()) errors += "$where: example ${ex.exampleId} has no target span"
+                if (ex.textDe.isBlank()) errors += "$where: example ${ex.exampleId} is blank"
+                if (ex.targetSpans.isEmpty()) {
+                    val message = "$where: example ${ex.exampleId} has no target span"
+                    if (entry.corpusDraft && !release) warnings += message else errors += message
+                }
                 val sorted = ex.targetSpans.sortedBy { it.start }
                 sorted.zipWithNext().forEach { (a, b) -> if (b.start < a.end) errors += "$where: overlapping spans in ${ex.exampleId}" }
                 ex.targetSpans.forEach { span ->

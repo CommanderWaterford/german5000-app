@@ -1,7 +1,7 @@
 # Implementation status
 
 Traceability from the [specification](german5000-android-spec.md) to code and tests, as of
-the initial implementation (27 October 2026). "Automated" means a test in this repository
+the corpus import update (28 October 2026). "Automated" means a test in this repository
 exercises the behaviour; device, accessibility and Play-console checks still need a person
 with hardware and a Play developer account.
 
@@ -13,7 +13,7 @@ covered · ⛔ blocked on owner input or content work · ⬜ not started
 | ID | Status | Where | Evidence / notes |
 | --- | --- | --- | --- |
 | FR-01 Offline first use + free lesson | ✅ | `features/onboarding`, `features/study`, `apps/german5000` | `FirstRunSmokeTest.onboardingThenFirstLesson` (Robolectric, no network) |
-| FR-02 Validated catalog of exactly 5,000 | ⛔ | `core/content/PackValidator`, `tools/content-pipeline` | Release validation enforces 5,000 approved entries; only a 50-entry pilot exists. `ContentPipelineTest` |
+| FR-02 Validated catalog of exactly 5,000 | ⛔ | `core/content/PackValidator`, `tools/content-pipeline` | 4,010 ranked draft entries imported with one example each and English/grammar enrichment; release still requires 5,000 approved entries. `ContentPipelineTest` |
 | FR-03 Local progress, sessions, prefs, favourites | ✅ | `core/database`, `core/settings/UserPreferences` | `LearningRepositoryTest` |
 | FR-04 Skippable placement assessment | ✅ | `core/learning/Assessment`, `features/study/Assessment*` | `AssessmentTest`; resumable via persisted seed |
 | FR-05 SRS scheduling | ✅ | `core/learning/SrsV1`, `SessionPlanner` | `SrsV1Test` incl. golden sequence; `SessionPlannerTest` |
@@ -38,7 +38,7 @@ covered · ⛔ blocked on owner input or content work · ⬜ not started
 | AT-04 | ✅ | `LearningRepositoryTest.committedAnswerSurvivesRestart`, `pendingItemIsReturnedInsteadOfPlanningANewOne` |
 | AT-05 | ✅ | `SrsV1Test.againThenRelearningGoodUsesRecoveryInterval` |
 | AT-06 | ✅ | `AssessmentTest`; assessment never writes cards/events |
-| AT-07 | ✅ (pilot scale) | `FirstRunSmokeTest.lockedEntriesExplainPremiumAndOtherTabsRender` (pilot free limit is 20) |
+| AT-07 | ✅ | `FirstRunSmokeTest.lockedEntriesExplainPremiumAndOtherTabsRender` (draft corpus free limit is 1,000) |
 | AT-08 | ✅ | `EntitlementRepositoryTest.pendingDoesNotUnlock` |
 | AT-09 | 🟡 | `restoreFromPlayOwnership` with fake gateway; real Play restore untested |
 | AT-10 | ✅ | `authoritativeRefundRevokes` |
@@ -66,8 +66,8 @@ covered · ⛔ blocked on owner input or content work · ⬜ not started
   (`languages/german/GermanGrammar.kt`). `pluralStatus` uses `has_plural | no_plural | plural_only`.
 - **compileSdk 37, targetSdk 36.** Current AndroidX releases require compiling against API 37;
   the target stays at the Play requirement (API 36) per spec §17.
-- **Placement band size and free limit come from the pack manifest** so the pilot (bands of 10,
-  free limit 20) exercises the same code paths; release validation requires 1,000/1,000.
+- **Placement band size and free limit come from the pack manifest**. The draft corpus
+  uses bands of 1,000 and a free limit of 1,000, matching the release configuration.
 - **Keyboard alternatives** (`ä→ae`, `ß→ss`, …) are derived by the pipeline into the pack
   as explicit per-sense lists, skipped on collisions with other lemmas, and overridable by editors.
 

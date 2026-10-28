@@ -41,3 +41,6 @@ captures/
 *.iml
 .cxx/
 .externalNativeBuild/
+# Python content-import caches
+__pycache__/
+*.pyc

@@ -1,0 +1,1785 @@
+{
+  "entries": [
+    {
+      "entryId": "de.article.der.01",
+      "lemma": "der",
+      "pos": "ARTICLE",
+      "grammar": {
+        "forms": "nom der/die/das/die · acc den/die/das/die · dat dem/der/dem/den · gen des/der/des/der"
+      },
+      "senses": [
+        {
+          "glossEn": "the (definite article)"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Der Hund schläft.",
+          "textEn": "The dog is sleeping.",
+          "target": [
+            "Der"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "die",
+        "das",
+        "den",
+        "dem",
+        "des"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.conj.und.01",
+      "lemma": "und",
+      "pos": "CONJUNCTION",
+      "grammar": {},
+      "senses": [
+        {
+          "glossEn": "and"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Ich trinke Kaffee und Tee.",
+          "textEn": "I drink coffee and tea.",
+          "target": [
+            "und"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.sein.01",
+      "lemma": "sein",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "ist",
+        "preterite": "war",
+        "participle2": "gewesen",
+        "auxiliary": "sein",
+        "separablePrefix": "not_applicable",
+        "reflexive": "no"
+      },
+      "senses": [
+        {
+          "glossEn": "to be"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Das Wetter ist heute schön.",
+          "textEn": "The weather is nice today.",
+          "target": [
+            "ist"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "bin",
+        "bist",
+        "ist",
+        "sind",
+        "seid",
+        "war",
+        "gewesen"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.prep.in.01",
+      "lemma": "in",
+      "pos": "PREPOSITION",
+      "grammar": {
+        "governedCases": "accusative|dative"
+      },
+      "senses": [
+        {
+          "glossEn": "in, into",
+          "acceptedMeaningsEn": [
+            "in",
+            "into"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Wir wohnen in Berlin.",
+          "textEn": "We live in Berlin.",
+          "target": [
+            "in"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "im",
+        "ins"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.pron.ich.01",
+      "lemma": "ich",
+      "pos": "PRONOUN",
+      "grammar": {
+        "forms": "nom ich · acc mich · dat mir · gen meiner"
+      },
+      "senses": [
+        {
+          "glossEn": "I"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Ich komme aus Irland.",
+          "textEn": "I come from Ireland.",
+          "target": [
+            "Ich"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "mich",
+        "mir"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.particle.nicht.01",
+      "lemma": "nicht",
+      "pos": "PARTICLE",
+      "grammar": {},
+      "senses": [
+        {
+          "glossEn": "not"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Das ist nicht mein Buch.",
+          "textEn": "That is not my book.",
+          "target": [
+            "nicht"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.haben.01",
+      "lemma": "haben",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "hat",
+        "preterite": "hatte",
+        "participle2": "gehabt",
+        "auxiliary": "haben",
+        "separablePrefix": "not_applicable",
+        "reflexive": "no"
+      },
+      "senses": [
+        {
+          "glossEn": "to have"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Wir haben zwei Kinder.",
+          "textEn": "We have two children.",
+          "target": [
+            "haben"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "habe",
+        "hast",
+        "hat",
+        "hatte",
+        "gehabt"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.pron.es.01",
+      "lemma": "es",
+      "pos": "PRONOUN",
+      "grammar": {
+        "forms": "nom es · acc es · dat ihm · gen seiner"
+      },
+      "senses": [
+        {
+          "glossEn": "it"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Es regnet schon wieder.",
+          "textEn": "It's raining again.",
+          "target": [
+            "Es"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.werden.01",
+      "lemma": "werden",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "wird",
+        "preterite": "wurde",
+        "participle2": "geworden",
+        "auxiliary": "sein",
+        "separablePrefix": "not_applicable",
+        "reflexive": "no",
+        "valency": "also forms the future (ich werde gehen) and the passive"
+      },
+      "senses": [
+        {
+          "glossEn": "to become, to get"
+        },
+        {
+          "glossEn": "will (future auxiliary)"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Im Winter wird es früh dunkel.",
+          "textEn": "In winter it gets dark early.",
+          "target": [
+            "wird"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "werde",
+        "wirst",
+        "wird",
+        "wurde",
+        "geworden"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.prep.mit.01",
+      "lemma": "mit",
+      "pos": "PREPOSITION",
+      "grammar": {
+        "governedCases": "dative"
+      },
+      "senses": [
+        {
+          "glossEn": "with"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Ich fahre mit dem Bus zur Arbeit.",
+          "textEn": "I go to work by bus.",
+          "target": [
+            "mit"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.adv.auch.01",
+      "lemma": "auch",
+      "pos": "ADVERB",
+      "grammar": {},
+      "senses": [
+        {
+          "glossEn": "also, too",
+          "acceptedMeaningsEn": [
+            "also",
+            "too"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Mein Bruder spricht auch Deutsch.",
+          "textEn": "My brother speaks German too.",
+          "target": [
+            "auch"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.prep.auf.01",
+      "lemma": "auf",
+      "pos": "PREPOSITION",
+      "grammar": {
+        "governedCases": "accusative|dative"
+      },
+      "senses": [
+        {
+          "glossEn": "on, onto",
+          "acceptedMeaningsEn": [
+            "on",
+            "onto"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Das Buch liegt auf dem Tisch.",
+          "textEn": "The book is on the table.",
+          "target": [
+            "auf"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "aufs"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.article.ein.01",
+      "lemma": "ein",
+      "pos": "ARTICLE",
+      "grammar": {
+        "forms": "nom ein/eine/ein · acc einen/eine/ein · dat einem/einer/einem · gen eines/einer/eines"
+      },
+      "senses": [
+        {
+          "glossEn": "a, an (indefinite article)"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Sie hat ein Auto gekauft.",
+          "textEn": "She bought a car.",
+          "target": [
+            "ein"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "eine",
+        "einen",
+        "einem",
+        "einer",
+        "eines"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.koennen.01",
+      "lemma": "können",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "kann",
+        "preterite": "konnte",
+        "participle2": "gekonnt",
+        "auxiliary": "haben",
+        "separablePrefix": "not_applicable",
+        "reflexive": "no",
+        "valency": "modal verb: + infinitive without zu"
+      },
+      "senses": [
+        {
+          "glossEn": "can, to be able to"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Kannst du mir helfen?",
+          "textEn": "Can you help me?",
+          "target": [
+            "Kannst"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "kann",
+        "kannst",
+        "konnte",
+        "gekonnt"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.conj.aber.01",
+      "lemma": "aber",
+      "pos": "CONJUNCTION",
+      "grammar": {},
+      "senses": [
+        {
+          "glossEn": "but"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Das Haus ist alt, aber schön.",
+          "textEn": "The house is old but beautiful.",
+          "target": [
+            "aber"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.noun.jahr.01",
+      "lemma": "Jahr",
+      "pos": "NOUN",
+      "grammar": {
+        "gender": "neuter",
+        "singular": "Jahr",
+        "plural": "Jahre",
+        "pluralStatus": "has_plural",
+        "weakNoun": "false",
+        "article": "das"
+      },
+      "senses": [
+        {
+          "glossEn": "year"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Wir fahren jedes Jahr nach Italien.",
+          "textEn": "We go to Italy every year.",
+          "target": [
+            "Jahr"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "Jahre"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.adv.noch.01",
+      "lemma": "noch",
+      "pos": "ADVERB",
+      "grammar": {},
+      "senses": [
+        {
+          "glossEn": "still, yet",
+          "acceptedMeaningsEn": [
+            "still",
+            "yet"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Hast du noch Zeit?",
+          "textEn": "Do you still have time?",
+          "target": [
+            "noch"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.adv.schon.01",
+      "lemma": "schon",
+      "pos": "ADVERB",
+      "grammar": {},
+      "senses": [
+        {
+          "glossEn": "already"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Bist du schon fertig?",
+          "textEn": "Are you already finished?",
+          "target": [
+            "schon"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.prep.fuer.01",
+      "lemma": "für",
+      "pos": "PREPOSITION",
+      "grammar": {
+        "governedCases": "accusative"
+      },
+      "senses": [
+        {
+          "glossEn": "for"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Das Geschenk ist für dich.",
+          "textEn": "The present is for you.",
+          "target": [
+            "für"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.gehen.01",
+      "lemma": "gehen",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "geht",
+        "preterite": "ging",
+        "participle2": "gegangen",
+        "auxiliary": "sein",
+        "separablePrefix": "not_applicable",
+        "reflexive": "no"
+      },
+      "senses": [
+        {
+          "glossEn": "to go, to walk",
+          "acceptedMeaningsEn": [
+            "to go",
+            "to walk"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Morgen gehen wir ins Kino.",
+          "textEn": "Tomorrow we're going to the cinema.",
+          "target": [
+            "gehen"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "geht",
+        "ging",
+        "gegangen"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.noun.zeit.01",
+      "lemma": "Zeit",
+      "pos": "NOUN",
+      "grammar": {
+        "gender": "feminine",
+        "singular": "Zeit",
+        "plural": "Zeiten",
+        "pluralStatus": "has_plural",
+        "weakNoun": "false",
+        "article": "die"
+      },
+      "senses": [
+        {
+          "glossEn": "time"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Ich habe heute keine Zeit.",
+          "textEn": "I don't have time today.",
+          "target": [
+            "Zeit"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "Zeiten"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.machen.01",
+      "lemma": "machen",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "macht",
+        "preterite": "machte",
+        "participle2": "gemacht",
+        "auxiliary": "haben",
+        "separablePrefix": "not_applicable",
+        "reflexive": "no"
+      },
+      "senses": [
+        {
+          "glossEn": "to do, to make",
+          "acceptedMeaningsEn": [
+            "to do",
+            "to make"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Was machst du am Wochenende?",
+          "textEn": "What are you doing at the weekend?",
+          "target": [
+            "machst"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "macht",
+        "machte",
+        "gemacht"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.adj.gut.01",
+      "lemma": "gut",
+      "pos": "ADJECTIVE",
+      "grammar": {
+        "gradable": "true",
+        "comparative": "besser",
+        "superlative": "am besten"
+      },
+      "senses": [
+        {
+          "glossEn": "good, well",
+          "acceptedMeaningsEn": [
+            "good",
+            "well"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Das Essen schmeckt sehr gut.",
+          "textEn": "The food tastes very good.",
+          "target": [
+            "gut"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "besser"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.noun.mensch.01",
+      "lemma": "Mensch",
+      "pos": "NOUN",
+      "grammar": {
+        "gender": "masculine",
+        "singular": "Mensch",
+        "plural": "Menschen",
+        "pluralStatus": "has_plural",
+        "weakNoun": "true",
+        "article": "der"
+      },
+      "senses": [
+        {
+          "glossEn": "human being, person",
+          "acceptedMeaningsEn": [
+            "person",
+            "human"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Sie ist ein freundlicher Mensch.",
+          "textEn": "She is a friendly person.",
+          "target": [
+            "Mensch"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "Menschen"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.sagen.01",
+      "lemma": "sagen",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "sagt",
+        "preterite": "sagte",
+        "participle2": "gesagt",
+        "auxiliary": "haben",
+        "separablePrefix": "not_applicable",
+        "reflexive": "no"
+      },
+      "senses": [
+        {
+          "glossEn": "to say, to tell",
+          "acceptedMeaningsEn": [
+            "to say",
+            "to tell"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Was hat er gesagt?",
+          "textEn": "What did he say?",
+          "target": [
+            "gesagt"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "sagt",
+        "sagte",
+        "gesagt"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.conj.dass.01",
+      "lemma": "dass",
+      "pos": "CONJUNCTION",
+      "grammar": {},
+      "senses": [
+        {
+          "glossEn": "that (introducing a clause)"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Ich glaube, dass er recht hat.",
+          "textEn": "I think that he is right.",
+          "target": [
+            "dass"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.noun.frau.01",
+      "lemma": "Frau",
+      "pos": "NOUN",
+      "grammar": {
+        "gender": "feminine",
+        "singular": "Frau",
+        "plural": "Frauen",
+        "pluralStatus": "has_plural",
+        "weakNoun": "false",
+        "article": "die"
+      },
+      "senses": [
+        {
+          "glossEn": "woman"
+        },
+        {
+          "glossEn": "wife"
+        },
+        {
+          "glossEn": "Mrs, Ms (form of address)"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Die Frau dort ist meine Lehrerin.",
+          "textEn": "The woman over there is my teacher.",
+          "target": [
+            "Frau"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "Frauen"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.kommen.01",
+      "lemma": "kommen",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "kommt",
+        "preterite": "kam",
+        "participle2": "gekommen",
+        "auxiliary": "sein",
+        "separablePrefix": "not_applicable",
+        "reflexive": "no"
+      },
+      "senses": [
+        {
+          "glossEn": "to come"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Wann kommst du nach Hause?",
+          "textEn": "When are you coming home?",
+          "target": [
+            "kommst"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "kommt",
+        "kam",
+        "gekommen"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.adj.gross.01",
+      "lemma": "groß",
+      "pos": "ADJECTIVE",
+      "grammar": {
+        "gradable": "true",
+        "comparative": "größer",
+        "superlative": "am größten"
+      },
+      "senses": [
+        {
+          "glossEn": "big, large, tall",
+          "acceptedMeaningsEn": [
+            "big",
+            "large",
+            "tall"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Unsere Wohnung ist nicht sehr groß.",
+          "textEn": "Our flat is not very big.",
+          "target": [
+            "groß"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "größer"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.noun.kind.01",
+      "lemma": "Kind",
+      "pos": "NOUN",
+      "grammar": {
+        "gender": "neuter",
+        "singular": "Kind",
+        "plural": "Kinder",
+        "pluralStatus": "has_plural",
+        "weakNoun": "false",
+        "article": "das"
+      },
+      "senses": [
+        {
+          "glossEn": "child"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Das Kind spielt im Garten.",
+          "textEn": "The child is playing in the garden.",
+          "target": [
+            "Kind"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "Kinder"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.noun.tag.01",
+      "lemma": "Tag",
+      "pos": "NOUN",
+      "grammar": {
+        "gender": "masculine",
+        "singular": "Tag",
+        "plural": "Tage",
+        "pluralStatus": "has_plural",
+        "weakNoun": "false",
+        "article": "der"
+      },
+      "senses": [
+        {
+          "glossEn": "day"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Ich arbeite acht Stunden am Tag.",
+          "textEn": "I work eight hours a day.",
+          "target": [
+            "Tag"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "Tage"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.sehen.01",
+      "lemma": "sehen",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "sieht",
+        "preterite": "sah",
+        "participle2": "gesehen",
+        "auxiliary": "haben",
+        "separablePrefix": "not_applicable",
+        "reflexive": "no"
+      },
+      "senses": [
+        {
+          "glossEn": "to see"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Siehst du das Schiff dort?",
+          "textEn": "Do you see the ship over there?",
+          "target": [
+            "Siehst"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "sieht",
+        "sah",
+        "gesehen"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.adj.neu.01",
+      "lemma": "neu",
+      "pos": "ADJECTIVE",
+      "grammar": {
+        "gradable": "true",
+        "comparative": "neuer",
+        "superlative": "am neuesten"
+      },
+      "senses": [
+        {
+          "glossEn": "new"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Ich brauche einen neuen Computer.",
+          "textEn": "I need a new computer.",
+          "target": [
+            "neuen"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "neuer"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.noun.mann.01",
+      "lemma": "Mann",
+      "pos": "NOUN",
+      "grammar": {
+        "gender": "masculine",
+        "singular": "Mann",
+        "plural": "Männer",
+        "pluralStatus": "has_plural",
+        "weakNoun": "false",
+        "article": "der"
+      },
+      "senses": [
+        {
+          "glossEn": "man"
+        },
+        {
+          "glossEn": "husband"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Der Mann wartet auf den Bus.",
+          "textEn": "The man is waiting for the bus.",
+          "target": [
+            "Mann"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "Männer"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.adv.heute.01",
+      "lemma": "heute",
+      "pos": "ADVERB",
+      "grammar": {},
+      "senses": [
+        {
+          "glossEn": "today"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Heute bleibe ich zu Hause.",
+          "textEn": "Today I'm staying at home.",
+          "target": [
+            "Heute"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.noun.haus.01",
+      "lemma": "Haus",
+      "pos": "NOUN",
+      "grammar": {
+        "gender": "neuter",
+        "singular": "Haus",
+        "plural": "Häuser",
+        "pluralStatus": "has_plural",
+        "weakNoun": "false",
+        "article": "das"
+      },
+      "senses": [
+        {
+          "glossEn": "house"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Ihr Haus hat einen großen Garten.",
+          "textEn": "Their house has a big garden.",
+          "target": [
+            "Haus"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "Häuser"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.geben.01",
+      "lemma": "geben",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "gibt",
+        "preterite": "gab",
+        "participle2": "gegeben",
+        "auxiliary": "haben",
+        "separablePrefix": "not_applicable",
+        "reflexive": "no",
+        "valency": "jemandem (dative) etwas (accusative) geben; es gibt + accusative = there is/are"
+      },
+      "senses": [
+        {
+          "glossEn": "to give"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Kannst du mir das Salz geben?",
+          "textEn": "Can you pass me the salt?",
+          "target": [
+            "geben"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "gibt",
+        "gab",
+        "gegeben"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.adv.hier.01",
+      "lemma": "hier",
+      "pos": "ADVERB",
+      "grammar": {},
+      "senses": [
+        {
+          "glossEn": "here"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Wohnst du hier?",
+          "textEn": "Do you live here?",
+          "target": [
+            "hier"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.adv.sehr.01",
+      "lemma": "sehr",
+      "pos": "ADVERB",
+      "grammar": {},
+      "senses": [
+        {
+          "glossEn": "very"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Vielen Dank, das ist sehr nett.",
+          "textEn": "Thank you very much, that's very kind.",
+          "target": [
+            "sehr"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.noun.leute.01",
+      "lemma": "Leute",
+      "pos": "NOUN",
+      "grammar": {
+        "gender": "plural_only",
+        "singular": "not_applicable",
+        "plural": "Leute",
+        "pluralStatus": "plural_only",
+        "weakNoun": "false"
+      },
+      "senses": [
+        {
+          "glossEn": "people"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Auf dem Markt waren viele Leute.",
+          "textEn": "There were a lot of people at the market.",
+          "target": [
+            "Leute"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.prep.bei.01",
+      "lemma": "bei",
+      "pos": "PREPOSITION",
+      "grammar": {
+        "governedCases": "dative"
+      },
+      "senses": [
+        {
+          "glossEn": "at, near, with (someone's place)",
+          "acceptedMeaningsEn": [
+            "at",
+            "near"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Ich wohne noch bei meinen Eltern.",
+          "textEn": "I still live with my parents.",
+          "target": [
+            "bei"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "beim"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.anfangen.01",
+      "lemma": "anfangen",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "fängt an",
+        "preterite": "fing an",
+        "participle2": "angefangen",
+        "auxiliary": "haben",
+        "separablePrefix": "an",
+        "reflexive": "no"
+      },
+      "senses": [
+        {
+          "glossEn": "to begin, to start",
+          "acceptedMeaningsEn": [
+            "to begin",
+            "to start"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Der Kurs fängt um neun Uhr an.",
+          "textEn": "The course starts at nine o'clock.",
+          "target": [
+            "fängt",
+            "an"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "fängt an",
+        "fing an",
+        "angefangen"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.noun.geld.01",
+      "lemma": "Geld",
+      "pos": "NOUN",
+      "grammar": {
+        "gender": "neuter",
+        "singular": "Geld",
+        "plural": "Gelder",
+        "pluralStatus": "has_plural",
+        "weakNoun": "false",
+        "article": "das"
+      },
+      "senses": [
+        {
+          "glossEn": "money"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Ich habe kein Geld dabei.",
+          "textEn": "I don't have any money on me.",
+          "target": [
+            "Geld"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "Gelder"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.adj.klein.01",
+      "lemma": "klein",
+      "pos": "ADJECTIVE",
+      "grammar": {
+        "gradable": "true",
+        "comparative": "kleiner",
+        "superlative": "am kleinsten"
+      },
+      "senses": [
+        {
+          "glossEn": "small, little",
+          "acceptedMeaningsEn": [
+            "small",
+            "little"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Das Zimmer ist klein, aber hell.",
+          "textEn": "The room is small but bright.",
+          "target": [
+            "klein"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "kleiner"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.noun.stadt.01",
+      "lemma": "Stadt",
+      "pos": "NOUN",
+      "grammar": {
+        "gender": "feminine",
+        "singular": "Stadt",
+        "plural": "Städte",
+        "pluralStatus": "has_plural",
+        "weakNoun": "false",
+        "article": "die"
+      },
+      "senses": [
+        {
+          "glossEn": "town, city",
+          "acceptedMeaningsEn": [
+            "town",
+            "city"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Hamburg ist eine große Stadt.",
+          "textEn": "Hamburg is a big city.",
+          "target": [
+            "Stadt"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "Städte"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.adj.schoen.01",
+      "lemma": "schön",
+      "pos": "ADJECTIVE",
+      "grammar": {
+        "gradable": "true",
+        "comparative": "schöner",
+        "superlative": "am schönsten"
+      },
+      "senses": [
+        {
+          "glossEn": "beautiful, nice, lovely",
+          "acceptedMeaningsEn": [
+            "beautiful",
+            "nice",
+            "lovely"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Wir hatten einen schönen Urlaub.",
+          "textEn": "We had a lovely holiday.",
+          "target": [
+            "schönen"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "schöner"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.fahren.01",
+      "lemma": "fahren",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "fährt",
+        "preterite": "fuhr",
+        "participle2": "gefahren",
+        "auxiliary": "haben|sein",
+        "separablePrefix": "not_applicable",
+        "reflexive": "no",
+        "valency": "perfect with sein when travelling (ich bin gefahren); with haben when driving something (ich habe das Auto gefahren)"
+      },
+      "senses": [
+        {
+          "glossEn": "to go (by vehicle), to drive, to travel",
+          "acceptedMeaningsEn": [
+            "to drive",
+            "to travel"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Am Samstag fahren wir an die Ostsee.",
+          "textEn": "On Saturday we're going to the Baltic Sea.",
+          "target": [
+            "fahren"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "fährt",
+        "fuhr",
+        "gefahren"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.freuen.01",
+      "lemma": "freuen",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "freut",
+        "preterite": "freute",
+        "participle2": "gefreut",
+        "auxiliary": "haben",
+        "separablePrefix": "not_applicable",
+        "reflexive": "required",
+        "valency": "sich freuen über + accusative (be pleased about); sich freuen auf + accusative (look forward to)"
+      },
+      "senses": [
+        {
+          "glossEn": "to be pleased, to be glad (sich freuen)"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Ich freue mich über dein Geschenk.",
+          "textEn": "I'm pleased about your present.",
+          "target": [
+            "freue",
+            "mich"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "sich freuen",
+        "freut sich",
+        "freute sich"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.noun.freund.01",
+      "lemma": "Freund",
+      "pos": "NOUN",
+      "grammar": {
+        "gender": "masculine",
+        "singular": "Freund",
+        "plural": "Freunde",
+        "pluralStatus": "has_plural",
+        "weakNoun": "false",
+        "article": "der"
+      },
+      "senses": [
+        {
+          "glossEn": "friend"
+        },
+        {
+          "glossEn": "boyfriend"
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Mein Freund wohnt in München.",
+          "textEn": "My friend lives in Munich.",
+          "target": [
+            "Freund"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "Freunde"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    },
+    {
+      "entryId": "de.verb.aufstehen.01",
+      "lemma": "aufstehen",
+      "pos": "VERB",
+      "grammar": {
+        "present3sg": "steht auf",
+        "preterite": "stand auf",
+        "participle2": "aufgestanden",
+        "auxiliary": "sein",
+        "separablePrefix": "auf",
+        "reflexive": "no"
+      },
+      "senses": [
+        {
+          "glossEn": "to get up, to stand up",
+          "acceptedMeaningsEn": [
+            "to get up",
+            "to stand up"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "textDe": "Ich stehe jeden Morgen um sechs auf.",
+          "textEn": "I get up at six every morning.",
+          "target": [
+            "stehe",
+            "auf"
+          ],
+          "sense": 1
+        }
+      ],
+      "aliases": [
+        "steht auf",
+        "stand auf",
+        "aufgestanden"
+      ],
+      "editorialStatus": "draft",
+      "rightsIds": [
+        "claude-drafted-pending-rights-review"
+      ],
+      "notes": "Pilot placeholder drafted with AI assistance; requires native-speaker linguistic review, audio, and rights assessment before release."
+    }
+  ]
+}

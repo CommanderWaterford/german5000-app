@@ -28,13 +28,13 @@ object InfoPages {
 
     const val METHOD_TITLE = "How the word list and reviews work"
     val METHOD = """
-        The word list is ordered by a curated frequency ranking: one entry is a dictionary form plus part of speech. Inflected forms, plurals and multiple meanings don't count as extra words. Frequency order is a guide to usefulness, not a CEFR level, and completing the list does not guarantee fluency or a specific level of comprehension.
+        This draft build contains 4,010 entries ordered by the supplied German workbook ranking. Each entry has one example sentence. Imported English translations and grammar are drafts awaiting review; the workbook's underlying frequency source has not yet been verified. Frequency order is a guide to usefulness, not a CEFR level, and completing the list does not guarantee fluency or a specific level of comprehension.
 
         Reviews use a fixed spaced-repetition schedule (g5000_srs_v1). New words are repeated after 1 and 10 minutes, then after days. Each correct review lengthens the gap; a slip brings the word back after 10 minutes and resumes at a shorter interval. Missing days never resets your history.
 
         "Currently strong" means a review interval of at least 21 days with your last two reviews rated Good or Easy.
 
-        The placement check samples 30 items across five rank bands. It suggests a starting point only; it never marks words as learned.
+        The placement check uses eligible entries with English meanings. Unreviewed imported corpus entries are excluded. It suggests a starting point only; it never marks words as learned.
     """.trimIndent()
 
     const val HELP_TITLE = "Help"
@@ -54,6 +54,10 @@ object InfoPages {
     val LICENSES = """
         German5000 uses open-source components including AndroidX, Jetpack Compose, Room, WorkManager, DataStore, Kotlin and kotlinx libraries (Apache License 2.0), Gson (Apache License 2.0) and the Google Play Billing Library (Android Software Development Kit License).
 
-        Vocabulary data, examples, translations and recordings: see the rights ledger for this content version. The current build contains pilot content that is not licensed for release.
+        German grammar and some draft meanings are adapted from English Wiktionary contributors via Kaikki.org / Wiktextract (extracted 25 October 2026 from the 1 October 2026 dump). Per-word source URLs are included in the entry notes. Wiktionary text is available under Creative Commons Attribution-ShareAlike; see https://en.wiktionary.org/wiki/Wiktionary:Copyrights and https://creativecommons.org/licenses/by-sa/4.0/. Extraction and adaptation to the app's grammar fields were automated; manual draft corrections were also made.
+
+        Most imported English meanings and sentence translations were generated with Google Translate on 28 October 2026 and are unreviewed. The ranked word list and German sentences come from the user-supplied german_words.xlsx workbook. One absent example was supplied as an AI draft.
+
+        Vocabulary data, examples, translations and recordings: see the rights ledger for this content version. This draft content is pending rights review and is not cleared for release.
     """.trimIndent()
 }

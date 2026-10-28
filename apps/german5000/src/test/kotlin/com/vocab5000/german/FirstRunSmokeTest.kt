@@ -61,7 +61,7 @@ class FirstRunSmokeTest {
         waitForText("reviews due")
         click("Start session")
 
-        // Ranks 1 and 2 of the pilot pack are introduced; the planner then avoids asking
+        // Ranks 1 and 2 retain the enriched pilot entries; the planner then avoids asking
         // the just-introduced word and recalls rank 1 ("der") first.
         waitForText("article · rank 1")
         click("Got it")
@@ -96,15 +96,15 @@ class FirstRunSmokeTest {
         waitForText("reviews due")
     }
 
-    /** AT-07 (pilot scale): words above the free limit are browsable but locked, with an explanation. */
+    /** AT-07: corpus words above the free limit are browsable but locked, with an explanation. */
     @Test fun lockedEntriesExplainPremiumAndOtherTabsRender() {
         finishOnboarding()
         compose.onNodeWithText("Library").performClick()
         waitForText("Search German or English")
-        compose.onNode(hasSetTextAction()).performTextInput("Leute")
+        compose.onNode(hasSetTextAction()).performTextInput("Schwein")
         waitForText("Premium")
         // Locked rows show lemma, rank and part of speech only — no meaning.
-        compose.onNode(hasText("noun") and hasText("Leute") and hasClickAction()).performClick()
+        compose.onNode(hasText("noun") and hasText("Schwein") and hasClickAction()).performClick()
         waitForText("part of Premium")
         click("About Premium")
         waitForText("German5000 Premium — one-time purchase")

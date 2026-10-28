@@ -43,6 +43,7 @@ data class SourceEntry(
     val cefrTag: String? = null,
     val notes: String? = null,
     val assessmentEligible: Boolean = true,
+    val corpusDraft: Boolean = false,
 )
 
 @Serializable
@@ -159,6 +160,7 @@ class ContentPipeline(private val languagePack: LanguagePack) {
                 searchAliases = src.aliases,
                 rightsIds = src.rightsIds,
                 assessmentEligible = src.assessmentEligible,
+                corpusDraft = src.corpusDraft,
             ).also { dto ->
                 val spoken = runCatching { languagePack.grammarRenderer.citationForm(dto.toModel()) }.getOrDefault(src.lemma)
                 audio += audioRecord(wordAudioId, "audio/${src.entryId}/word.m4a", spoken, audioRoot, audioFiles, mode, errors, warnings)

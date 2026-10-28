@@ -56,6 +56,7 @@ fun IntroductionView(entry: Entry, renderer: GrammarRenderer, onPlay: PlayAudio,
         Text("${renderer.partOfSpeechLabel(entry.pos)} · rank ${entry.curriculumRank}", style = MaterialTheme.typography.bodyMedium)
         AudioButton("Play word", onClick = { onPlay(entry.wordAudioId, renderer.citationForm(entry)) })
         Text(entry.primarySense.glossEn, style = MaterialTheme.typography.titleLarge)
+        if (entry.corpusDraft) Text("Draft translation and grammar · awaiting review", style = MaterialTheme.typography.bodySmall)
         val others = entry.senses.filter { it.senseId != entry.primarySenseId }
         if (others.isNotEmpty()) Text("Also: " + others.joinToString("; ") { it.glossEn }, style = MaterialTheme.typography.bodyMedium)
         GrammarBlock(entry, renderer)

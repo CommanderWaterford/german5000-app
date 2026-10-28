@@ -13,10 +13,12 @@ German content (`content/german5000`).
 - **What is done / open:** [docs/IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md)
 - **Release runbook and gates:** [docs/RELEASE.md](docs/RELEASE.md)
 - **Content workflow:** [content/german5000/README.md](content/german5000/README.md)
+- **Google Cloud audio production:** [docs/GOOGLE_CLOUD_TTS.md](docs/GOOGLE_CLOUD_TTS.md)
 
-> **Status:** engineering baseline. The app runs end to end on a **50-entry pilot content
-> pack that is AI-drafted, unreviewed, unrecorded and not rights-cleared**. Release builds
-> refuse to package it (see "Release gates" below).
+> **Status:** engineering baseline with **4,010 ranked entries imported from the supplied
+> German workbook**, one example sentence per entry, draft English translations and grammar.
+> The original 50 enriched pilot entries retain their IDs. Content is unreviewed,
+> unrecorded and pending rights review. Release builds refuse to package it.
 
 ## Requirements
 
@@ -30,7 +32,7 @@ Create `local.properties` with `sdk.dir=/path/to/Android/sdk` if `ANDROID_HOME` 
 ## Build and test
 
 ```bash
-./gradlew :apps:german5000:assembleDebug          # debug APK with the pilot content pack
+./gradlew :apps:german5000:assembleDebug          # debug APK with the draft corpus pack
 ./gradlew jvmTest testDebugUnitTest               # all JVM + Robolectric tests
 ./gradlew lintDebug                               # Android Lint, all modules
 ./gradlew :tools:content-pipeline:run --args="validate $PWD/content/german5000/source pilot"

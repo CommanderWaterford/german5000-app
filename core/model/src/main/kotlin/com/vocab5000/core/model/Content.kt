@@ -7,7 +7,7 @@ package com.vocab5000.core.model
  */
 enum class PartOfSpeech {
     NOUN, VERB, ADJECTIVE, ADVERB, PREPOSITION, PRONOUN, DETERMINER, ARTICLE,
-    CONJUNCTION, NUMERAL, PARTICLE, INTERJECTION,
+    CONJUNCTION, NUMERAL, PARTICLE, INTERJECTION, SUFFIX, UNSPECIFIED,
 }
 
 enum class EditorialStatus(val wireName: String) {
@@ -76,6 +76,8 @@ data class Entry(
     val searchAliases: List<String> = emptyList(),
     val rightsIds: List<String> = emptyList(),
     val assessmentEligible: Boolean = true,
+    /** Imported, automatically enriched content awaiting linguistic review. Never releasable. */
+    val corpusDraft: Boolean = false,
 ) {
     val primarySense: Sense get() = senses.first { it.senseId == primarySenseId }
     val primaryExample: Example? get() = examples.firstOrNull { it.senseId == primarySenseId } ?: examples.firstOrNull()

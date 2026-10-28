@@ -1,9 +1,9 @@
 {
   "packId": "german5000",
-  "contentVersion": "0.1.0-pilot",
+  "contentVersion": "0.2.0-corpus-draft",
   "languageId": "de-DE",
-  "freeEntryLimit": 20,
-  "bandSize": 10,
-  "rankSource": "placeholder",
+  "freeEntryLimit": 1000,
+  "bandSize": 1000,
+  "rankSource": "german_words.xlsx (user-supplied ranking; corpus provenance pending review)",
   "rightsManifestId": "german5000-rights-pilot"
 }

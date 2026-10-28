@@ -77,6 +77,7 @@ data class EntryDto(
     val searchAliases: List<String> = emptyList(),
     val rightsIds: List<String> = emptyList(),
     val assessmentEligible: Boolean = true,
+    val corpusDraft: Boolean = false,
 )
 
 @Serializable
@@ -150,6 +151,7 @@ object PackFormat {
         searchAliases = searchAliases,
         rightsIds = rightsIds,
         assessmentEligible = assessmentEligible,
+        corpusDraft = corpusDraft,
     )
 
     fun AudioDto.toModel() = AudioAsset(audioId, path, spokenText, format, durationMs, checksumSha256, rightsId)

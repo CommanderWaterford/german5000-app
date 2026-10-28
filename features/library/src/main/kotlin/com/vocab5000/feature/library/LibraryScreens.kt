@@ -157,8 +157,8 @@ fun EntryDetailScreen(
             lines.forEach { Text("${it.label}: ${it.value}") }
         }
         if (entry.examples.isNotEmpty()) {
-            SectionTitle("Examples")
-            entry.examples.forEach { ex ->
+            SectionTitle("Example")
+            entry.primaryExample?.let { ex ->
                 InfoCard {
                     Text(ex.textDe, style = MaterialTheme.typography.bodyLarge)
                     Text(ex.textEn, style = MaterialTheme.typography.bodyMedium)
