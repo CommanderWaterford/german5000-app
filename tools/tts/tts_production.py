@@ -533,8 +533,9 @@ def cmd_verify(args) -> int:
     if sizes:
         # §6.2: measure the budget on the pilot before recording everything.
         average = sum(sizes) / len(sizes)
-        print(f"Average {average / 1e3:.1f} kB per clip: about {average * 8020 / 1e6:.0f} MB for the current "
-              f"8,020 clips, {average * 10000 / 1e6:.0f} MB for the full 10,000 (budget: 180 MB download)")
+        print(f"Average {average / 1e3:.1f} kB per checked clip; extrapolated audio size "
+              f"{average * 10000 / 1e6:.0f} MB for 10,000 clips. "
+              "This subset estimate excludes app code; measure the final download against the 180 MB budget.")
     return 1 if problems else 0
 
 

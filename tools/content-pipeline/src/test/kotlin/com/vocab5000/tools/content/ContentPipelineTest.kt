@@ -23,13 +23,13 @@ class ContentPipelineTest {
         assertEquals(emptyList<String>(), result.errors)
         val pack = ContentPack.load(PackFormat.encode(result.pack), GermanLanguagePack)
         assertEquals((1..pack.entries.size).toList(), pack.byRank.map { it.curriculumRank })
-        assertEquals(4010, pack.entries.size)
+        assertEquals(5000, pack.entries.size)
         assertEquals(1000, pack.manifest.freeEntryLimit)
         assertEquals(1000, pack.manifest.bandSize)
         assertTrue(pack.entries.all { it.examples.size == 1 })
         assertTrue(pack.entries.all { it.primarySense.glossEn.isNotBlank() && it.primaryExample!!.textEn.isNotBlank() })
         assertTrue(pack.entries.filter { it.corpusDraft }.all { !it.assessmentEligible })
-        assertEquals("segeln", pack.byRank.last().lemma)
+        assertEquals("segeln", pack.byRank[4009].lemma)
         assertTrue(pack.search("Hbemd").any { it.lemma == "Hemd" })
         assertTrue(pack.search("Welle").any { it.lemma == "Weile" })
         val originalIds = Json.decodeFromString(SourceFile.serializer(), File(source, "pilot-entries.json").readText()).entries.map { it.entryId }
@@ -52,8 +52,8 @@ class ContentPipelineTest {
 
     @Test fun pilotSourcesAreNotReleasable() {
         val result = ContentPipeline(GermanLanguagePack).build(source, PackValidator.Mode.RELEASE)
-        assertTrue(result.errors.any { "exactly 5000" in it })
+        assertTrue(result.errors.none { "exactly 5000" in it })
         assertTrue(result.errors.any { "rights not cleared" in it })
-        assertTrue(result.errors.any { "audio file missing" in it })
+        assertTrue(result.errors.any { "corpus draft needs linguistic review" in it })
     }
 }

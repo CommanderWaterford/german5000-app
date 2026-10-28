@@ -15,11 +15,11 @@ German content (`content/german5000`).
 - **Content workflow:** [content/german5000/README.md](content/german5000/README.md)
 - **Google Cloud audio production:** [docs/GOOGLE_CLOUD_TTS.md](docs/GOOGLE_CLOUD_TTS.md)
 
-> **Status:** engineering baseline with **4,010 ranked entries imported from the supplied
-> German workbook**, one example sentence per entry, draft English translations and grammar.
-> The original 50 enriched pilot entries retain their IDs. Every entry has synthetic word
-> and example audio (Google Cloud TTS, see [tools/tts](tools/tts/README.md)). Content and audio
-> are unreviewed and pending rights review. Release builds refuse to package it.
+> **Status:** **5,000 entries**, each with one bilingual example and grammar: 4,010 original
+> workbook entries plus 990 draft additions from the supplied Leipzig news corpus. The owner
+> accepted the original audio and sentences and verified its frequency ranking against Leipzig.
+> Existing audio has mixed origins. The new additions remain drafts pending their own review;
+> production builds still enforce editorial and rights approval.
 
 ## Requirements
 

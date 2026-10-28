@@ -28,7 +28,7 @@ object InfoPages {
 
     const val METHOD_TITLE = "How the word list and reviews work"
     val METHOD = """
-        This draft build contains 4,010 entries ordered by the supplied German workbook ranking. Each entry has one example sentence. Imported English translations and grammar are drafts awaiting review; the workbook's underlying frequency source has not yet been verified. Frequency order is a guide to usefulness, not a CEFR level, and completing the list does not guarantee fluency or a specific level of comprehension.
+        This build contains 5,000 entries: the original 4,010 workbook entries, whose frequency ranking was verified against the Leipzig corpus, followed by 990 additions selected from the Leipzig German news corpus. Each entry has one example sentence. The additions use observed headword frequency and remain drafts awaiting review of meanings, grammar, examples and audio. Frequency order is a guide to usefulness, not a CEFR level, and completing the list does not guarantee fluency or a specific level of comprehension.
 
         Reviews use a fixed spaced-repetition schedule (g5000_srs_v1). New words are repeated after 1 and 10 minutes, then after days. Each correct review lengthens the gap; a slip brings the word back after 10 minutes and resumes at a shorter interval. Missing days never resets your history.
 
@@ -56,7 +56,7 @@ object InfoPages {
 
         German grammar and some draft meanings are adapted from English Wiktionary contributors via Kaikki.org / Wiktextract (extracted 25 October 2026 from the 1 October 2026 dump). Per-word source URLs are included in the entry notes. Wiktionary text is available under Creative Commons Attribution-ShareAlike; see https://en.wiktionary.org/wiki/Wiktionary:Copyrights and https://creativecommons.org/licenses/by-sa/4.0/. Extraction and adaptation to the app's grammar fields were automated; manual draft corrections were also made.
 
-        Most imported English meanings and sentence translations were generated with Google Translate on 28 October 2026 and are unreviewed. The ranked word list and German sentences come from the user-supplied german_words.xlsx workbook. One absent example was supplied as an AI draft.
+        Most imported English meanings and sentence translations were generated with Google Translate on 28 October 2026 and are unreviewed. The ranked word list and German sentences come from the user-supplied german_words.xlsx workbook. One absent original example was supplied as an AI draft. The 990 Leipzig additions use German news corpus examples, with ten AI-drafted replacements to remove caption artifacts or simplify context, dictionary-derived English meanings and grammar, and Google Cloud Translation for the remaining sentence translations. Audio for these additions is synthetic speech generated with Google Cloud Text-to-Speech; the original corpus audio has mixed origins.
 
         Vocabulary data, examples, translations and recordings: see the rights ledger for this content version. This draft content is pending rights review and is not cleared for release.
     """.trimIndent()

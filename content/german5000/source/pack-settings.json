@@ -1,9 +1,9 @@
 {
   "packId": "german5000",
-  "contentVersion": "0.2.0-corpus-draft",
+  "contentVersion": "0.3.0-leipzig-expansion-draft",
   "languageId": "de-DE",
   "freeEntryLimit": 1000,
   "bandSize": 1000,
-  "rankSource": "german_words.xlsx (user-supplied ranking; corpus provenance pending review)",
+  "rankSource": "Original 4,010 workbook entries verified against Leipzig by owner; 990 Leipzig deu_news_2025_300K additions ordered by observed headword frequency",
   "rightsManifestId": "german5000-rights-pilot"
 }

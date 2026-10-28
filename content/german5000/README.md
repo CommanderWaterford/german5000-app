@@ -10,7 +10,7 @@ source/
   corpus-import.json   source checksum, source ranks, selected sentences and entry-ID mapping
 rights/
   rights-ledger.json   rights records referenced by entries' rightsIds (spec §5.4)
-audio/                 (not yet present) recordings at audio/<entryId>/word.m4a and ex<N>.m4a
+audio/                 10,000 clips at audio/<entryId>/word.m4a and ex1.m4a
 ```
 
 The app never reads these files directly. `tools/content-pipeline` turns them into
@@ -31,7 +31,17 @@ Validate locally:
 ./gradlew :tools:content-pipeline:run --args="validate $PWD/content/german5000/source release"
 ```
 
-## Current state: 4,010-entry draft corpus
+## Current state: 5,000 entries
+
+The original 4,010 entries below are preserved. `source/leipzig-expansion.json` adds 990
+draft entries from the owner-supplied `deu_news_2025_300K.tar`, with dictionary grammar,
+English glosses, and one corpus example with a Google Cloud Translation draft per entry.
+Entry notes retain source sentence IDs and dictionary links. Workbook reimports append this
+checked-in expansion automatically. Candidate preparation is available in
+`tools/content-pipeline/prepare_leipzig.py`; regenerated candidates need translated examples
+and editorial review before replacing the checked-in expansion.
+
+### Original 4,010-entry corpus
 
 The supplied `german_words.xlsx` contributes all 4,010 ranked rows. The free range and
 rank bands are 1,000 entries wide. All original 50 pilot IDs, definitions, grammar and
@@ -50,8 +60,12 @@ explicitly marked AI draft. Existing pilot examples retain their correct transla
 Clear spelling/OCR errors are corrected with original spellings retained as search aliases;
 the second source `Welle` is `Weile` in its supplied example. No source row is discarded.
 
-The workbook ranking is preserved as supplied; its underlying frequency source is not
-yet established. All entries remain `draft`, with recordings and rights review pending.
+The workbook ranking is preserved as supplied and was verified against the Leipzig corpus
+by the owner (28 October 2026); no further specification of that verification is required.
+The owner also verified and accepted the existing example sentences and audio. All 8,020
+clips are present, with mixed origins; not all are Google Cloud synthesized. Source entries
+still carry `draft` flags and rights records remain pending. Review metadata needs to reflect
+the owner's confirmation separately from remaining English/grammar and release approval.
 Unreviewed corpus entries are excluded from placement assessment. Grammar fields are
 structurally validated for every part of speech. Pilot validation permits absent target
 annotations with warnings for the suffix and unspaced measurement examples. Cloze practice is

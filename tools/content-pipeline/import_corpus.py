@@ -139,12 +139,21 @@ def import_corpus(workbook, source):
             entry = copy.deepcopy(original)
             entry['examples'] = entry['examples'][:1]
             entries.append(entry)
+    # Preserve the independently curated Leipzig expansion on workbook reimports.
+    expansion_path = source / 'leipzig-expansion.json'
+    if expansion_path.exists():
+        additions = json.loads(expansion_path.read_text())['entries']
+        known_ids = {entry['entryId'] for entry in entries}
+        if any(entry['entryId'] in known_ids for entry in additions):
+            raise ValueError('Leipzig expansion overlaps workbook entry identities')
+        entries.extend(additions)
     (source / 'entries.json').write_text(json.dumps({'entries': entries}, ensure_ascii=False, indent=2) + '\n')
     (source / 'curriculum.txt').write_text('\n'.join(e['entryId'] for e in entries) + '\n')
     provenance = {
         'source': workbook.name, 'sha256': hashlib.sha256(workbook.read_bytes()).hexdigest(),
         'sourceEntryCount': len(rows), 'entryCount': len(entries),
-        'retainedPilotOnlyCount': len(entries) - len(rows),
+        'retainedPilotOnlyCount': sum(e['entryId'] not in used for e in pilot),
+        'expansionEntryCount': len(entries) - len(rows),
         'examplePolicy': 'One complete source sentence, preferring a literal target match. Existing bilingual examples retained for enriched pilot entries. One absent source example replaced by an explicitly marked AI draft.',
         'rows': [{'rank': rank, 'word': word, 'example': sentence, 'entryId': entry['entryId']} for (rank, word, sentence), entry in zip(rows, entries)],
     }

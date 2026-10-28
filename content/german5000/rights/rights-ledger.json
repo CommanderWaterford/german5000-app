@@ -4,7 +4,11 @@
   "records": [
     {
       "rightsId": "german-workbook-pending-review",
-      "assetClasses": ["frequency ranks", "German headwords", "German examples"],
+      "assetClasses": [
+        "frequency ranks",
+        "German headwords",
+        "German examples"
+      ],
       "source": "User-supplied german_words.xlsx, 4,010 ranked rows; SHA-256 recorded in source/corpus-import.json",
       "owner": "Workbook source owner (to confirm)",
       "license": "pending",
@@ -15,7 +19,11 @@
     },
     {
       "rightsId": "wiktionary-grammar-pending-review",
-      "assetClasses": ["grammar", "part of speech", "occasional English glosses"],
+      "assetClasses": [
+        "grammar",
+        "part of speech",
+        "occasional English glosses"
+      ],
       "owner": "English Wiktionary contributors",
       "source": "https://kaikki.org/dictionary/German/",
       "license": "CC BY-SA 4.0; attribution and adaptation review pending",
@@ -26,7 +34,10 @@
     },
     {
       "rightsId": "machine-translation-pending-review",
-      "assetClasses": ["English meanings", "English example translations"],
+      "assetClasses": [
+        "English meanings",
+        "English example translations"
+      ],
       "owner": "to confirm",
       "source": "Google Translate, German to English, generated 2026-10-28",
       "license": "pending terms review",
@@ -35,7 +46,12 @@
     },
     {
       "rightsId": "claude-drafted-pending-rights-review",
-      "assetClasses": ["definitions", "examples", "translations", "grammar"],
+      "assetClasses": [
+        "definitions",
+        "examples",
+        "translations",
+        "grammar"
+      ],
       "owner": "German5000 product owner (to confirm)",
       "license": "pending",
       "commercialUse": "pending",
@@ -46,7 +62,9 @@
     },
     {
       "rightsId": "frequency-source-unselected",
-      "assetClasses": ["frequency ranks"],
+      "assetClasses": [
+        "frequency ranks"
+      ],
       "owner": "unselected",
       "license": "pending procurement (spec §5.2; Leipzig Corpora Collection is a candidate only)",
       "commercialUse": "pending",
@@ -55,7 +73,10 @@
     },
     {
       "rightsId": "audio-google-tts-pending-review",
-      "assetClasses": ["word audio", "example audio"],
+      "assetClasses": [
+        "word audio",
+        "example audio"
+      ],
       "label": "Synthetic speech generated with Google Cloud Text-to-Speech. Not a human or native-speaker recording, and must not be described as one (spec §6.1).",
       "source": "Google Cloud Text-to-Speech API v1, voice de-DE-Wavenet-G (WaveNet, female, de-DE), plain-text input from each audio record's spokenText, no SSML or pronunciation overrides. LINEAR16 masters at the voice's natural 24 kHz, speaking rate 1.0; trimmed (100 ms lead, 150 ms tail kept), normalized to -18 LUFS integrated with true peak at or below -1 dBTP, delivered as mono AAC-LC 48 kbps M4A (encoder: macOS afconvert). Settings: tools/tts/tts-settings.json.",
       "owner": "German5000 product owner, as generated output under the product owner's Google Cloud account (to confirm)",
@@ -66,6 +87,19 @@
       "attribution": "none known (to confirm)",
       "evidence": "Produced 2026-10-28, 10:58-12:04 UTC, with tools/tts/tts_production.py: 8,020 clips (4,010 word, 4,010 example) from 7,811 synthesis requests, 0 errors; every clip verified for codec, duration and SHA-256 checksum. Voice chosen after a 100-entry pilot audition. The per-clip ledger (spoken text and hash, voice, settings, date, final SHA-256, duration, loudness, review status) and the lossless masters are in work/tts/, which is not in the repository and must be archived. Usage terms: https://docs.cloud.google.com/text-to-speech/quotas. Native German review pending for all 8,020 clips.",
       "status": "pending"
+    },
+    {
+      "rightsId": "leipzig-expansion-pending-review",
+      "assetClasses": [
+        "expansion frequency counts",
+        "980 German corpus examples",
+        "10 AI-drafted example replacements",
+        "990 draft sentence translations"
+      ],
+      "source": "Owner-supplied deu_news_2025_300K.tar",
+      "sha256": "ce1de2a29202dac6345489287e0c5b58a14d79f1cde3b4449932a72d17e627d3",
+      "status": "pending",
+      "evidence": "Imported 2026-10-28. Existing 4,010 entries preserved. New entries include Leipzig sentence IDs and dictionary attribution in notes. New sentence translations generated with Google Cloud Translation; new audio produced separately using Google Cloud TTS. New additions are drafts, not covered by owner acceptance of the original corpus. Ten source examples were replaced with explicitly noted AI drafts to remove caption artifacts or simplify context. Sentence quality acceptance for the original corpus is not extended to these additions."
     }
   ]
 }

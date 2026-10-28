@@ -1,14 +1,19 @@
 # Google Cloud Text-to-Speech audio production
 
 Project: German5000 Android app  
-Corpus version: `0.2.0-corpus-draft`  
+Corpus version: `0.3.0-leipzig-expansion-draft`
 Prepared: 28 October 2026
+
+The Leipzig expansion adds 990 entries and 1,980 Google Cloud TTS clips. Its production
+ledger and masters are kept separately in `work/tts-leipzig/`; the original mixed-source
+audio is preserved. Character counts and cost estimates below describe the original
+4,010-entry production baseline, not the expanded catalog.
 
 ## Required audio
 
 Generate German speech during content production and bundle the finished files with the app. Playback must work offline, including premium entries. Google Cloud credentials and API calls belong in the production workflow; the Android app continues to play packaged files.
 
-| Asset | Current corpus | Full 5,000-entry catalog |
+| Asset | Original corpus | Expanded 5,000-entry catalog |
 | --- | ---: | ---: |
 | Headword recording | 4,010 | 5,000 |
 | Single example-sentence recording | 4,010 | 5,000 |
@@ -16,7 +21,7 @@ Generate German speech during content production and bundle the finished files w
 
 No English recordings, additional example recordings, separate slow recordings, or grammar-form recordings are required for the current scope. Slow playback already uses speed `0.75` with pitch preserved in `AudioPlayer`.
 
-All 8,020 current clips were produced on 28 October 2026 with `de-DE-Wavenet-G` (48 kbps), using [`tools/tts`](../tools/tts/README.md); native review is pending. This document specifies the production workflow; it does not provision a Google Cloud project or generate billable audio.
+All 8,020 original clips are present and the owner confirmed on 28 October 2026 that the audio was verified and is okay. The owner also clarified that the clips have mixed origins: not all are Google Cloud synthesized. Historical Google production records use `de-DE-Wavenet-G` (48 kbps), but must not be treated as complete provenance for the current mixed-source assets. This document specifies the production workflow; it does not provision a Google Cloud project or generate billable audio.
 
 ## 1. Use the app's generated audio manifest
 
@@ -169,7 +174,7 @@ As checked on 28 October 2026, Google's listed rates after applicable free usage
 
 Review pronunciation, stress, articles, reflexive forms, natural sentence delivery, abbreviation/number readings, clipping, silence, and text-to-audio alignment. Have a qualified German reviewer sign off. The corpus's draft text should be reviewed before final recording; structural validation alone does not establish linguistic correctness.
 
-Keep the chosen voice, generation settings, synthetic origin, production/review evidence, and applicable usage terms in `content/german5000/rights/rights-ledger.json`. Label the recordings as synthetic. The `audio-google-tts-pending-review` record holds that evidence for the 28 October 2026 production (it replaced the earlier `audio-unrecorded` record); `tools/tts/tts_production.py rights` prints an updated summary after any rerun. Google's documentation permits use of generated audio in applications subject to its terms; retain the relevant evidence for the release process. [Google usage and limits](https://docs.cloud.google.com/text-to-speech/quotas)
+Keep the chosen voice, generation settings, synthetic origin, production/review evidence, and applicable usage terms in `content/german5000/rights/rights-ledger.json`. Label Google-generated recordings as synthetic; do not apply that label to all mixed-source assets. The `audio-google-tts-pending-review` record holds that evidence for the 28 October 2026 production (it replaced the earlier `audio-unrecorded` record); `tools/tts/tts_production.py rights` prints an updated summary after any rerun. Google's documentation permits use of generated audio in applications subject to its terms; retain the relevant evidence for the release process. [Google usage and limits](https://docs.cloud.google.com/text-to-speech/quotas)
 
 The current pipeline discovers the `.m4a` files and computes SHA-256 checksums automatically. `durationMs` and per-audio `rightsId` currently default to null; keep those in the production ledger until pipeline support is added. The pipeline checks file presence and hashes, but does not verify codecs, duration, loudness, or pronunciation. Add media inspection and listening review to the production checks.
 
@@ -183,7 +188,7 @@ Rebuild and validate from the repository root:
 
 Verify the rebuilt pack has **8,020 audio records**, a nonempty checksum for each record, and **no missing-audio warnings**. The two existing target-span warnings for the suffix and unspaced measurement examples are unrelated to audio. Check every packaged file with FFprobe or another media inspector and test word, sentence, replay, slow playback, and navigation cancellation in airplane mode.
 
-Adding audio alone does not make this a release-ready pack: the catalog still contains 4,010 entries, and draft content, linguistic review, and rights requirements remain. The production gate continues to require 5,000 approved entries with complete, reviewed audio.
+Adding audio alone does not make this a release-ready pack: the catalog now contains 5,000 entries, but draft content, linguistic review of the additions, and rights requirements remain. The production gate continues to require 5,000 approved entries with complete, reviewed audio.
 
 ## Completion checklist
 
