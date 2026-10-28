@@ -11,4 +11,5 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:content"))
     implementation(project(":core:settings"))
+    implementation(libs.compose.material.icons.extended)
 }

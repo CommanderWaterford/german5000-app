@@ -45,6 +45,11 @@ private val DarkColors = darkColorScheme(
     onBackground = Color(0xFFE6E8EB),
     surface = Color(0xFF1A1E23),
     onSurface = Color(0xFFE6E8EB),
+    onSurfaceVariant = Color(0xFFA9B0B8),
+    surfaceContainerLow = Color(0xFF161A1F),
+    surfaceContainerHigh = Color(0xFF22272D),
+    outline = Color(0xFF5B6169),
+    outlineVariant = Color(0xFF3A3F46),
 )
 
 @Composable

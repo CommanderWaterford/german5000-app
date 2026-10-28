@@ -48,7 +48,10 @@ class FirstRunSmokeTest {
 
     private fun click(text: String) {
         waitForText(text)
-        compose.onNodeWithText(text, substring = true).performScrollTo().performClick()
+        val node = compose.onNodeWithText(text, substring = true)
+        // Actions pinned below a scrolling area (Today's session buttons) have nothing to scroll.
+        runCatching { node.performScrollTo() }
+        node.performClick()
         compose.waitForIdle()
     }
 
@@ -58,8 +61,8 @@ class FirstRunSmokeTest {
         click("10 words (recommended)")
         click("Not now")
         click("Go to Today")
-        waitForText("reviews due")
-        click("Start session")
+        waitForText("reviews still due")
+        click("Start: 10 new")
 
         // Ranks 1 and 2 retain the enriched pilot entries; the planner then avoids asking
         // the just-introduced word and recalls rank 1 ("der") first.
@@ -85,7 +88,7 @@ class FirstRunSmokeTest {
         // DataStore is a process-wide singleton, so an earlier test may have completed onboarding.
         compose.waitUntil(10_000) {
             compose.onAllNodes(hasText("Get started")).fetchSemanticsNodes().isNotEmpty() ||
-                compose.onAllNodes(hasText("reviews due")).fetchSemanticsNodes().isNotEmpty()
+                compose.onAllNodes(hasText("reviews still due", substring = true)).fetchSemanticsNodes().isNotEmpty()
         }
         if (compose.onAllNodes(hasText("Get started")).fetchSemanticsNodes().isEmpty()) return
         click("Get started")
@@ -93,7 +96,7 @@ class FirstRunSmokeTest {
         click("5 words")
         click("Not now")
         click("Go to Today")
-        waitForText("reviews due")
+        waitForText("reviews still due")
     }
 
     /** AT-07: corpus words above the free limit are browsable but locked, with an explanation. */
