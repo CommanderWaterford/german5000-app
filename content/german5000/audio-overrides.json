@@ -1,0 +1,3 @@
+{
+  "_readme": "Reviewed pronunciation fixes for tools/tts/tts_production.py, keyed by audio ID: {\"forText\": <the pack spokenText it was written for>, \"text\" or \"ssml\": <what to send instead>, \"reason\": ...}. See tools/tts/README.md."
+}

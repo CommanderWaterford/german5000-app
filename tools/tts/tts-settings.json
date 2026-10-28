@@ -1,0 +1,20 @@
+{
+  "_voiceChoice": "de-DE-Wavenet-G chosen 2026-10-28 after listening to the 100-entry pilot audition (48 kbps); quality judged fine for the app.",
+  "_note": "Production settings for tools/tts/tts_production.py. Record the voice chosen after the pilot listening test here; changing any value re-renders the affected clips (masters are reused when only normalization or encoding changes).",
+  "synthesis": {
+    "voice": "de-DE-Wavenet-G",
+    "language": "de-DE",
+    "speakingRate": 1.0,
+    "sampleRateHertz": 0
+  },
+  "normalization": {
+    "targetLufs": -18.0,
+    "ceilingDbtp": -1.0,
+    "leadPadMs": 100,
+    "tailPadMs": 150
+  },
+  "encoding": {
+    "bitrateKbps": 48,
+    "encoder": "auto"
+  }
+}

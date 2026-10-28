@@ -44,3 +44,5 @@ captures/
 # Python content-import caches
 __pycache__/
 *.pyc
+# TTS production: lossless masters and ledger (archive separately), rehearsals
+/work/

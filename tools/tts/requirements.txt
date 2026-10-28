@@ -1,0 +1,3 @@
+# Only the 'voices' and 'produce' commands with the Google backend need this;
+# plan, pilot, verify, review and the tests use the standard library alone.
+google-cloud-texttospeech>=2.16
