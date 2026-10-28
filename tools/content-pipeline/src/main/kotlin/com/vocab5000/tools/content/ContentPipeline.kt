@@ -121,9 +121,15 @@ class ContentPipeline(private val languagePack: LanguagePack) {
             }
             val examples = src.examples.mapIndexed { i, ex ->
                 val exampleId = "${src.entryId}.ex${i + 1}"
-                val spans = ex.target.mapNotNull { token ->
-                    TextSpans.locateUnique(ex.textDe, token).also {
-                        if (it == null) errors += "$where: target '$token' is not a unique whole word in \"${ex.textDe}\""
+                val spans = ex.target.mapIndexedNotNull { tokenIndex, token ->
+                    val all = TextSpans.locateAll(ex.textDe, token)
+                    when {
+                        all.size == 1 -> all.first()
+                        all.size > 1 -> if (ex.target.size > 1 && tokenIndex == ex.target.lastIndex) all.last() else all.first()
+                        else -> {
+                            errors += "$where: target '$token' is not a unique whole word in \"${ex.textDe}\""
+                            null
+                        }
                     }
                 }
                 val sense = senses.getOrNull(ex.sense - 1)

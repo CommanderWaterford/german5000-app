@@ -25,6 +25,15 @@ object TextSpans {
         return CodepointSpan(start, start + target.codePointCount(0, target.length))
     }
 
+    /** Finds all whole-word occurrences of [target] in appearance order. */
+    fun locateAll(text: String, target: String): List<CodepointSpan> {
+        val len = target.codePointCount(0, target.length)
+        return wholeWordOccurrences(text, target).map { idx ->
+            val start = text.codePointCount(0, idx)
+            CodepointSpan(start, start + len)
+        }
+    }
+
     private fun wholeWordOccurrences(text: String, target: String): List<Int> {
         if (target.isEmpty()) return emptyList()
         val result = mutableListOf<Int>()
