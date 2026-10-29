@@ -8,6 +8,7 @@ import com.vocab5000.core.database.LearningRepository
 import com.vocab5000.core.database.StatsRepository
 import com.vocab5000.core.learning.SessionPlanner
 import com.vocab5000.core.model.AppClock
+import com.vocab5000.core.model.Entry
 import com.vocab5000.core.settings.PreferencesRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +19,21 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 import java.time.LocalDate
+
+/** One word learned today, split so a goal tile can colour its article. */
+data class GoalWord(val article: String?, val word: String)
+
+/** Today's featured word: a free entry picked deterministically from the date. */
+data class WordOfDay(
+    val entryId: String,
+    val headline: String,
+    val citation: String,
+    val gloss: String,
+    val exampleDe: String?,
+    val exampleEn: String?,
+    val wordAudioId: String?,
+    val exampleAudioId: String?,
+)
 
 data class TodayState(
     val loaded: Boolean = false,
@@ -33,6 +49,9 @@ data class TodayState(
     val freeLimitReached: Boolean = false,
     val premium: Boolean = false,
     val date: LocalDate? = null,
+    /** Words introduced today in the order they were learned; fills the goal tiles. */
+    val goalWords: List<GoalWord> = emptyList(),
+    val wordOfDay: WordOfDay? = null,
     /** Activity level per day for the streak map, Monday-first columns; -1 marks days after today. */
     val heat: List<Int> = emptyList(),
 ) {
@@ -67,21 +86,24 @@ class TodayViewModel(
         premium,
         tick,
     ) { cards, userEntries, prefs, isPremium, _ ->
-        val today = clock.today().toString()
-        val introducedToday = userEntries.values.count { it.introductionLocalDate == today }
+        val todayDate = clock.today()
+        val today = todayDate.toString()
+        val todaysEntries = userEntries.values.filter { it.introductionLocalDate == today }
         val introduced = userEntries.values.filter { it.introducedAt != null }.map { it.entryId }.toSet()
         val candidates = catalog.newCandidates(introduced, isPremium, prefs.selectedBand, 1)
         val allLocked = candidates.isEmpty() && !isPremium && catalog.content.byRank.any { it.entryId !in introduced }
         TodayState(
             loaded = true,
             dueCount = catalog.dueCount(cards, isPremium, prefs.listeningEnabled, clock.nowMillis()),
-            newAllowance = if (prefs.newWordsPaused || candidates.isEmpty()) 0 else (prefs.dailyNewGoal - introducedToday).coerceAtLeast(0),
+            newAllowance = if (prefs.newWordsPaused || candidates.isEmpty()) 0 else (prefs.dailyNewGoal - todaysEntries.size).coerceAtLeast(0),
             dailyGoal = prefs.dailyNewGoal,
-            introducedToday = introducedToday,
+            introducedToday = todaysEntries.size,
             newWordsPaused = prefs.newWordsPaused,
             noNewWordsLeft = candidates.isEmpty(),
             freeLimitReached = allLocked,
             premium = isPremium,
+            goalWords = todaysEntries.sortedBy { it.introducedAt ?: 0L }.mapNotNull { catalog.content.entry(it.entryId) }.map(::goalWord),
+            wordOfDay = wordOfDay(todayDate, isPremium),
         )
     }
 
@@ -98,6 +120,35 @@ class TodayViewModel(
 
     fun setPaused(paused: Boolean) = viewModelScope.launch { preferences.setNewWordsPaused(paused) }
     fun setGoal(goal: Int) = viewModelScope.launch { preferences.setDailyGoal(goal) }
+
+    private fun goalWord(entry: Entry): GoalWord {
+        val citation = catalog.languagePack.grammarRenderer.citationForm(entry)
+        val first = citation.substringBefore(' ')
+        return if (first != citation && first in ARTICLES) GoalWord(first, citation.substring(first.length + 1)) else GoalWord(null, citation)
+    }
+
+    /** Same word for everyone on a given day, cycling through the words the learner can open. */
+    private fun wordOfDay(today: LocalDate, isPremium: Boolean): WordOfDay? {
+        val pool = catalog.content.byRank.filter { catalog.isUnlocked(it, isPremium) }
+        if (pool.isEmpty()) return null
+        val entry = pool[(today.toEpochDay() % pool.size).toInt()]
+        val renderer = catalog.languagePack.grammarRenderer
+        val example = entry.primaryExample
+        return WordOfDay(
+            entryId = entry.entryId,
+            headline = renderer.headline(entry),
+            citation = renderer.citationForm(entry),
+            gloss = entry.primarySense.glossEn,
+            exampleDe = example?.textDe,
+            exampleEn = example?.textEn,
+            wordAudioId = entry.wordAudioId,
+            exampleAudioId = example?.audioId,
+        )
+    }
+
+    private companion object {
+        val ARTICLES = setOf("der", "die", "das")
+    }
 }
 
 const val STREAK_MAP_WEEKS = 12

@@ -15,15 +15,18 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Insights
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
@@ -50,6 +53,7 @@ import com.vocab5000.core.designsystem.ErrorMessage
 import com.vocab5000.core.designsystem.G5000Theme
 import com.vocab5000.core.designsystem.LoadingState
 import com.vocab5000.core.designsystem.ThemePreference
+import com.vocab5000.core.designsystem.Wordmark
 import com.vocab5000.core.model.SessionMode
 import com.vocab5000.core.settings.UserPreferences
 import com.vocab5000.feature.library.EntryDetailScreen
@@ -78,13 +82,13 @@ import kotlinx.coroutines.launch
 private enum class TopLevel(val route: String, val label: String, val icon: ImageVector) {
     TODAY("today", "Today", Icons.Filled.Home),
     STUDY("study", "Study", Icons.Filled.PlayArrow),
-    LIBRARY("library", "Library", Icons.Filled.Search),
-    PROGRESS("progress", "Progress", Icons.Filled.Info),
+    LIBRARY("library", "Library", Icons.AutoMirrored.Filled.MenuBook),
+    PROGRESS("progress", "Progress", Icons.Filled.Insights),
     SETTINGS("settings", "Settings", Icons.Filled.Settings),
 }
 
-/** Routes that hide the navigation bar so the learner can focus. */
-private val focusRoutes = setOf("session?mode={mode}", "assessment", "practice")
+/** Routes that hide the navigation bar: exercises, and detail pages that carry their own back arrow. */
+private val focusRoutes = setOf("session?mode={mode}", "assessment", "practice", "entry/{id}", "premium")
 
 @Composable
 fun German5000Root(container: AppContainer, clockChanged: Boolean) {
@@ -111,9 +115,10 @@ fun German5000Root(container: AppContainer, clockChanged: Boolean) {
 
 @Composable
 private fun ContentError(problems: List<String>) {
-    Column(Modifier.safeDrawingPadding().padding(24.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("The word list couldn't be opened", style = MaterialTheme.typography.headlineSmall)
-        Text("Your progress is safe. Please update or reinstall the app; if this continues, contact support.")
+    Column(Modifier.safeDrawingPadding().padding(24.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Wordmark()
+        Text("The word list couldn't be opened", style = MaterialTheme.typography.headlineMedium)
+        Text("Your progress is safe. Please update or reinstall the app; if this continues, contact support.", color = MaterialTheme.colorScheme.onSurfaceVariant)
         problems.take(5).forEach { ErrorMessage(it) }
     }
 }
@@ -129,8 +134,31 @@ private fun MainScaffold(container: AppContainer, content: ContentState.Ready, p
     } else {
         NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(androidx.compose.material3.adaptive.currentWindowAdaptiveInfo())
     }
+    val colors = MaterialTheme.colorScheme
+    val itemColors = NavigationSuiteDefaults.itemColors(
+        navigationBarItemColors = NavigationBarItemDefaults.colors(
+            selectedIconColor = colors.onPrimaryContainer,
+            selectedTextColor = colors.onSurface,
+            indicatorColor = colors.primaryContainer,
+            unselectedIconColor = colors.onSurfaceVariant,
+            unselectedTextColor = colors.onSurfaceVariant,
+        ),
+        navigationRailItemColors = NavigationRailItemDefaults.colors(
+            selectedIconColor = colors.onPrimaryContainer,
+            selectedTextColor = colors.onSurface,
+            indicatorColor = colors.primaryContainer,
+            unselectedIconColor = colors.onSurfaceVariant,
+            unselectedTextColor = colors.onSurfaceVariant,
+        ),
+    )
     NavigationSuiteScaffold(
         layoutType = layoutType,
+        containerColor = colors.background,
+        navigationSuiteColors = NavigationSuiteDefaults.colors(
+            navigationBarContainerColor = colors.surface,
+            navigationRailContainerColor = colors.surface,
+            navigationDrawerContainerColor = colors.surface,
+        ),
         navigationSuiteItems = {
             TopLevel.entries.forEach { dest ->
                 item(
@@ -138,6 +166,7 @@ private fun MainScaffold(container: AppContainer, content: ContentState.Ready, p
                     onClick = { nav.navigateTopLevel(dest.route) },
                     icon = { Icon(dest.icon, contentDescription = null) },
                     label = { Text(dest.label) },
+                    colors = itemColors,
                 )
             }
         },
@@ -173,7 +202,9 @@ private fun G5000NavHost(nav: NavHostController, container: AppContainer, conten
                 pendingAssessment = prefs.pendingAssessmentAfterOnboarding,
                 onStart = { mode -> nav.navigate("session?mode=${mode?.name ?: ""}") },
                 onAssessment = { nav.navigate("assessment") },
+                onPractice = { nav.navigate("practice") },
                 onOpenPremium = { nav.navigate("premium") },
+                onPlay = play,
             )
         }
         composable(TopLevel.STUDY.route) {

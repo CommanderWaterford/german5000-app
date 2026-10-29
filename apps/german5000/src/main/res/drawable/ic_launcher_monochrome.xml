@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Single-colour version of the three rising pills for themed icons. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
@@ -6,5 +7,11 @@
     android:viewportHeight="108">
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M30,32h48a6,6 0,0 1,6 6v26a6,6 0,0 1,-6 6H50l-12,10v-10h-8a6,6 0,0 1,-6 -6V38a6,6 0,0 1,6 -6z" />
+        android:pathData="M35,51 A5,5 0 0 1 45,51 L45,67 A5,5 0 0 1 35,67 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M49,43 A5,5 0 0 1 59,43 L59,67 A5,5 0 0 1 49,67 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M63,35 A5,5 0 0 1 73,35 L73,67 A5,5 0 0 1 63,67 Z" />
 </vector>

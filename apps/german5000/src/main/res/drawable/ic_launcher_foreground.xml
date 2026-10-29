@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Speech bubble with three stripes (black, red, gold) — a neutral placeholder mark. -->
+<!-- Three rising pills in the der/die/das mnemonic colors: learning as progress. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    <!-- der: blue -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M30,32h48a6,6 0,0 1,6 6v26a6,6 0,0 1,-6 6H50l-12,10v-10h-8a6,6 0,0 1,-6 -6V38a6,6 0,0 1,6 -6z" />
-    <path android:fillColor="#1B2430" android:pathData="M34,41h40v6H34z" />
-    <path android:fillColor="#C8102E" android:pathData="M34,48h40v6H34z" />
-    <path android:fillColor="#E8B100" android:pathData="M34,55h40v6H34z" />
+        android:fillColor="#2D4FDE"
+        android:pathData="M35,51 A5,5 0 0 1 45,51 L45,67 A5,5 0 0 1 35,67 Z" />
+    <!-- die: red -->
+    <path
+        android:fillColor="#D62B4C"
+        android:pathData="M49,43 A5,5 0 0 1 59,43 L59,67 A5,5 0 0 1 49,67 Z" />
+    <!-- das: green -->
+    <path
+        android:fillColor="#17835A"
+        android:pathData="M63,35 A5,5 0 0 1 73,35 L73,67 A5,5 0 0 1 63,67 Z" />
 </vector>

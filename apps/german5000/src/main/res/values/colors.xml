@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="launcher_background">#00696B</color>
-    <color name="window_background">#FAFAF7</color>
+    <!-- Warm paper, matching the Compose theme background. -->
+    <color name="launcher_background">#FAF8F3</color>
+    <color name="window_background">#FAF8F3</color>
 </resources>

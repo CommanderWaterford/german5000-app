@@ -7,17 +7,19 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Card
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -28,14 +30,26 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.vocab5000.core.designsystem.ArticleText
 import com.vocab5000.core.designsystem.AudioButton
+import com.vocab5000.core.designsystem.ChoiceOptionCard
 import com.vocab5000.core.designsystem.ErrorMessage
-import com.vocab5000.core.designsystem.InfoCard
+import com.vocab5000.core.designsystem.ExampleRow
+import com.vocab5000.core.designsystem.FeedbackCard
+import com.vocab5000.core.designsystem.GrammarTable
+import com.vocab5000.core.designsystem.ListeningPrompt
 import com.vocab5000.core.designsystem.MinTouchTarget
+import com.vocab5000.core.designsystem.OptionState
 import com.vocab5000.core.designsystem.PrimaryAction
+import com.vocab5000.core.designsystem.PromptCard
+import com.vocab5000.core.designsystem.PromptLabel
+import com.vocab5000.core.designsystem.PromptNote
 import com.vocab5000.core.designsystem.SecondaryAction
 import com.vocab5000.core.designsystem.SpecialCharacterBar
+import com.vocab5000.core.designsystem.correctColor
+import com.vocab5000.core.designsystem.partialColor
 import com.vocab5000.core.learning.AnswerVerdict
 import com.vocab5000.core.model.ChoicePrompt
 import com.vocab5000.core.model.Entry
@@ -50,24 +64,39 @@ typealias PlayAudio = (audioId: String?, fallbackText: String?) -> Unit
 
 @Composable
 fun IntroductionView(entry: Entry, renderer: GrammarRenderer, onPlay: PlayAudio, onContinue: () -> Unit, busy: Boolean) {
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text("New word", style = MaterialTheme.typography.labelLarge)
-        Text(renderer.headline(entry), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
-        Text("${renderer.partOfSpeechLabel(entry.pos)} · rank ${entry.curriculumRank}", style = MaterialTheme.typography.bodyMedium)
-        AudioButton("Play word", onClick = { onPlay(entry.wordAudioId, renderer.citationForm(entry)) })
-        Text(entry.primarySense.glossEn, style = MaterialTheme.typography.titleLarge)
-        if (entry.corpusDraft) Text("Draft translation and grammar · awaiting review", style = MaterialTheme.typography.bodySmall)
-        val others = entry.senses.filter { it.senseId != entry.primarySenseId }
-        if (others.isNotEmpty()) Text("Also: " + others.joinToString("; ") { it.glossEn }, style = MaterialTheme.typography.bodyMedium)
-        GrammarBlock(entry, renderer)
-        entry.primaryExample?.let { ex ->
-            InfoCard {
-                Text(ex.textDe, style = MaterialTheme.typography.bodyLarge)
-                Text(ex.textEn, style = MaterialTheme.typography.bodyMedium)
-                AudioButton("Play example", onClick = { onPlay(ex.audioId, ex.textDe) })
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        PromptCard {
+            PromptLabel("New word")
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                ArticleText(renderer.headline(entry), style = MaterialTheme.typography.headlineLarge, modifier = Modifier.weight(1f))
+                AudioButton("Play word", onClick = { onPlay(entry.wordAudioId, renderer.citationForm(entry)) })
+            }
+            Text(entry.primarySense.glossEn, style = MaterialTheme.typography.titleLarge)
+            Text(
+                "${renderer.partOfSpeechLabel(entry.pos)} · rank ${entry.curriculumRank}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            if (entry.corpusDraft) PromptNote("Draft translation and grammar · awaiting review")
+            val others = entry.senses.filter { it.senseId != entry.primarySenseId }
+            if (others.isNotEmpty()) {
+                Text(
+                    "Also: " + others.joinToString("; ") { it.glossEn },
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
             }
         }
-        Text("You'll be asked to recall it shortly.", style = MaterialTheme.typography.bodySmall)
+        GrammarBlock(entry, renderer)
+        entry.primaryExample?.let { ex ->
+            Card(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(16.dp)) {
+                    PromptLabel("Example")
+                    ExampleRow(ex.textDe, ex.textEn, onPlay = { onPlay(ex.audioId, ex.textDe) })
+                }
+            }
+        }
+        PromptNote("You'll be asked to recall it shortly.")
         PrimaryAction("Got it", onClick = onContinue, enabled = !busy)
     }
 }
@@ -76,13 +105,8 @@ fun IntroductionView(entry: Entry, renderer: GrammarRenderer, onPlay: PlayAudio,
 fun GrammarBlock(entry: Entry, renderer: GrammarRenderer) {
     val lines = renderer.grammarLines(entry)
     if (lines.isEmpty()) return
-    InfoCard {
-        lines.forEach { line ->
-            Row(Modifier.semantics(mergeDescendants = true) {}) {
-                Text("${line.label}: ", fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.bodyMedium)
-                Text(line.value, style = MaterialTheme.typography.bodyMedium)
-            }
-        }
+    Card(Modifier.fillMaxWidth()) {
+        GrammarTable(lines.map { it.label to it.value }, Modifier.padding(16.dp))
     }
 }
 
@@ -102,18 +126,27 @@ fun TypedPromptView(
     scheduled: Boolean,
     busy: Boolean,
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text(prompt.instruction, style = MaterialTheme.typography.labelLarge)
-        if (prompt.mode == ExerciseMode.LISTENING) {
-            // The answer is never shown or announced before submission.
-            AudioButton("Play recording", onClick = { onPlay(prompt.audioId, prompt.answer.canonical) })
-        } else if (prompt.mode == ExerciseMode.CLOZE) {
-            Text("${prompt.clozeBefore}_____${prompt.clozeAfter}", style = MaterialTheme.typography.titleLarge, modifier = Modifier.semantics { contentDescription = "${prompt.clozeBefore} blank ${prompt.clozeAfter}" })
-            Text(prompt.cue, style = MaterialTheme.typography.bodyMedium)
-        } else {
-            Text(prompt.cue, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        PromptCard {
+            when (prompt.mode) {
+                // The answer is never shown or announced before submission.
+                ExerciseMode.LISTENING -> ListeningPrompt(prompt.instruction, onSpeak = { onPlay(prompt.audioId, prompt.answer.canonical) })
+                ExerciseMode.CLOZE -> {
+                    PromptLabel(prompt.instruction)
+                    Text(
+                        "${prompt.clozeBefore}_____${prompt.clozeAfter}",
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier.semantics { contentDescription = "${prompt.clozeBefore} blank ${prompt.clozeAfter}" },
+                    )
+                    Text(prompt.cue, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                else -> {
+                    PromptLabel(prompt.instruction)
+                    ArticleText(prompt.cue, style = MaterialTheme.typography.headlineLarge)
+                }
+            }
+            prompt.contextHint?.let { PromptNote(it) }
         }
-        prompt.contextHint?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
 
         when (phase) {
             is AnswerPhase.Typing -> {
@@ -124,6 +157,7 @@ fun TypedPromptView(
                     onValueChange = onInput,
                     label = { Text("Your answer") },
                     singleLine = true,
+                    shape = MaterialTheme.shapes.small,
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.None,
                         autoCorrectEnabled = false,
@@ -134,13 +168,30 @@ fun TypedPromptView(
                 )
                 SpecialCharacterBar(specialCharacters, onInsert = { onInput(phase.input + it) })
                 if (phase.nearMissRetry) {
-                    Text("Almost — check your spelling and try once more.", color = MaterialTheme.colorScheme.secondary, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
+                    Text(
+                        "Almost — check your spelling and try once more.",
+                        color = partialColor(),
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite },
+                    )
                 }
-                if (phase.hintShown && prompt.hint != null) Text("Hint: ${prompt.hint}", style = MaterialTheme.typography.bodyMedium)
+                if (phase.hintShown && prompt.hint != null) {
+                    Text(
+                        "Hint: ${prompt.hint}",
+                        modifier = Modifier.fillMaxWidth(),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Center,
+                    )
+                }
                 PrimaryAction("Check", onClick = onSubmit, enabled = phase.input.isNotBlank())
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    if (prompt.hint != null && !phase.hintShown) TextButton(onClick = onHint, modifier = Modifier.heightIn(min = MinTouchTarget)) { Text("Hint") }
-                    TextButton(onClick = onReveal, modifier = Modifier.heightIn(min = MinTouchTarget)) { Text(if (scheduled) "Show answer" else "I don't know") }
+                    if (prompt.hint != null && !phase.hintShown) {
+                        TextButton(onClick = onHint, modifier = Modifier.weight(1f).heightIn(min = MinTouchTarget)) { Text("💡 Hint") }
+                    }
+                    TextButton(onClick = onReveal, modifier = Modifier.weight(1f).heightIn(min = MinTouchTarget)) {
+                        Text(if (scheduled) "Show answer" else "I don't know")
+                    }
                 }
             }
             is AnswerPhase.TypedFeedback -> TypedFeedbackView(prompt, phase, onPlay, onOverride, onSelectRating, onContinue, scheduled, busy)
@@ -161,30 +212,36 @@ private fun TypedFeedbackView(
     busy: Boolean,
 ) {
     val verdict = phase.result?.verdict
-    val headline = when {
-        phase.facts.validAnswerOverride -> "✓ Marked correct by you"
-        verdict == AnswerVerdict.CORRECT -> "✓ Correct"
-        verdict == AnswerVerdict.CORRECT_CASE_ONLY -> "✓ Correct — note the capitalisation"
-        verdict == AnswerVerdict.CORRECT_KEYBOARD_ALTERNATIVE -> "✓ Correct (accepted keyboard spelling)"
-        phase.facts.revealedBeforeAnswer || phase.facts.skipped -> "Answer shown"
-        else -> "✗ Not quite"
+    val (headline, color) = when {
+        phase.facts.validAnswerOverride -> "✓ Marked correct by you" to correctColor()
+        verdict == AnswerVerdict.CORRECT -> "✓ Correct" to correctColor()
+        verdict == AnswerVerdict.CORRECT_CASE_ONLY -> "✓ Correct — note the capitalisation" to partialColor()
+        verdict == AnswerVerdict.CORRECT_KEYBOARD_ALTERNATIVE -> "✓ Correct (accepted keyboard spelling)" to partialColor()
+        phase.facts.revealedBeforeAnswer || phase.facts.skipped -> "Answer shown" to MaterialTheme.colorScheme.onSurfaceVariant
+        else -> "✗ Not quite" to MaterialTheme.colorScheme.error
     }
-    InfoCard {
-        Text(headline, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
-        if (phase.input.isNotBlank() && !phase.success) Text("You wrote: ${phase.input}", style = MaterialTheme.typography.bodyMedium)
-        Text("Answer: ${prompt.answer.canonical}", style = MaterialTheme.typography.titleLarge)
-        Text(prompt.explanation, style = MaterialTheme.typography.bodyMedium)
-        if (prompt.mode != ExerciseMode.CLOZE) AudioButton("Play word", onClick = { onPlay(prompt.audioId, prompt.answer.canonical) })
-    }
-    if (scheduled) {
-        if (phase.success) {
-            Text("How did that feel?", style = MaterialTheme.typography.labelLarge)
-            RatingRow(phase.allowed, phase.selected, onSelectRating)
-        } else if (!phase.facts.revealedBeforeAnswer && !phase.facts.skipped) {
-            SecondaryAction("My answer was correct", onClick = onOverride, enabled = !busy)
+    FeedbackCard(headline, color, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) {
+        if (phase.input.isNotBlank() && !phase.success) {
+            Text("You wrote: ${phase.input}", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("Answer", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                ArticleText(prompt.answer.canonical, style = MaterialTheme.typography.titleLarge)
+            }
+            if (prompt.mode != ExerciseMode.CLOZE) AudioButton("Play word", onClick = { onPlay(prompt.audioId, prompt.answer.canonical) })
+        }
+        Text(prompt.explanation, style = MaterialTheme.typography.bodyMedium)
+        if (scheduled) {
+            if (phase.success) {
+                Text("How did that feel?", style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(top = 4.dp))
+                RatingRow(phase.allowed, phase.selected, onSelectRating)
+            } else if (!phase.facts.revealedBeforeAnswer && !phase.facts.skipped) {
+                SecondaryAction("My answer was correct", onClick = onOverride, enabled = !busy)
+            }
+        }
+        PrimaryAction(if (busy) "Saving…" else "Continue", onClick = onContinue, enabled = !busy)
     }
-    PrimaryAction(if (busy) "Saving…" else "Continue", onClick = onContinue, enabled = !busy)
 }
 
 private val ratingExplanations = mapOf(
@@ -218,38 +275,44 @@ fun ChoicePromptView(
     onContinue: () -> Unit,
     revealFeedback: Boolean = true,
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text(prompt.instruction, style = MaterialTheme.typography.labelLarge)
-        if (prompt.audioId != null && prompt.mode == ExerciseMode.LISTENING) {
-            AudioButton("Play recording", onClick = { onPlay(prompt.audioId, null) })
-        } else {
-            Text(prompt.cue, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        PromptCard {
+            if (prompt.audioId != null && prompt.mode == ExerciseMode.LISTENING) {
+                ListeningPrompt(prompt.instruction, onSpeak = { onPlay(prompt.audioId, null) })
+            } else {
+                PromptLabel(prompt.instruction)
+                ArticleText(prompt.cue, style = MaterialTheme.typography.headlineLarge)
+            }
         }
         val feedback = phase as? AnswerPhase.ChoiceFeedback
-        prompt.options.forEachIndexed { index, option ->
-            val marker = when {
-                feedback == null || !revealFeedback -> ""
-                index == prompt.correctIndex -> "✓ "
-                index == feedback.chosen -> "✗ "
-                else -> ""
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            prompt.options.forEachIndexed { index, option ->
+                val state = when {
+                    feedback == null || !revealFeedback -> OptionState.NEUTRAL
+                    index == prompt.correctIndex -> OptionState.CORRECT
+                    index == feedback.chosen -> OptionState.WRONG
+                    else -> OptionState.NEUTRAL
+                }
+                ChoiceOptionCard(option, state, enabled = feedback == null, onClick = { onChoose(index) })
             }
-            OutlinedButton(
-                onClick = { onChoose(index) },
-                enabled = feedback == null,
-                modifier = Modifier.fillMaxWidth().heightIn(min = MinTouchTarget),
-            ) { Text(marker + option) }
         }
-        if (feedback == null && prompt.allowDontKnow) SecondaryAction("I don't know", onClick = { onChoose(null) })
+        if (feedback == null && prompt.allowDontKnow) {
+            TextButton(onClick = { onChoose(null) }, modifier = Modifier.fillMaxWidth().heightIn(min = MinTouchTarget)) { Text("I don't know") }
+        }
         if (feedback != null) {
             if (revealFeedback) {
-                Text(
-                    if (feedback.correct) "✓ Correct" else "✗ The answer is: ${prompt.options[prompt.correctIndex]}",
-                    style = MaterialTheme.typography.titleMedium,
+                FeedbackCard(
+                    title = if (feedback.correct) "✓ Correct" else "✗ Not quite",
+                    color = if (feedback.correct) correctColor() else MaterialTheme.colorScheme.error,
                     modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite },
-                )
-                Text(prompt.explanation, style = MaterialTheme.typography.bodyMedium)
+                ) {
+                    if (!feedback.correct) Text("Answer: ${prompt.options[prompt.correctIndex]}", style = MaterialTheme.typography.titleMedium)
+                    Text(prompt.explanation, style = MaterialTheme.typography.bodyMedium)
+                    PrimaryAction("Continue", onClick = onContinue)
+                }
+            } else {
+                PrimaryAction("Continue", onClick = onContinue)
             }
-            PrimaryAction("Continue", onClick = onContinue)
         }
     }
 }
@@ -264,21 +327,27 @@ fun FlashcardView(
     busy: Boolean,
     error: String? = null,
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text("Recall the German word, then reveal", style = MaterialTheme.typography.labelLarge)
-        Text(prompt.front, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
-        prompt.frontHint?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        PromptCard {
+            PromptLabel("Recall the German word, then reveal")
+            Text(prompt.front, style = MaterialTheme.typography.headlineLarge)
+            prompt.frontHint?.let { PromptNote(it) }
+        }
         if (!revealed) {
             PrimaryAction("Reveal", onClick = onFlip)
         } else {
-            InfoCard {
-                Text(prompt.back, style = MaterialTheme.typography.titleLarge, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
-                prompt.backDetail?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
-                AudioButton("Play word", onClick = { onPlay(prompt.audioId, prompt.back) })
+            FeedbackCard("Answer", MaterialTheme.colorScheme.primary, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    ArticleText(prompt.back, style = MaterialTheme.typography.headlineSmall, modifier = Modifier.weight(1f))
+                    AudioButton("Play word", onClick = { onPlay(prompt.audioId, prompt.back) })
+                }
+                prompt.backDetail?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant) }
             }
-            Text("How well did you recall it?", style = MaterialTheme.typography.labelLarge)
-            Rating.entries.forEach { rating ->
-                SecondaryAction(ratingExplanations.getValue(rating), onClick = { onRate(rating) }, enabled = !busy)
+            Text("How well did you recall it?", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Rating.entries.forEach { rating ->
+                    ChoiceOptionCard(ratingExplanations.getValue(rating), OptionState.NEUTRAL, enabled = !busy, onClick = { onRate(rating) })
+                }
             }
         }
         error?.let { ErrorMessage(it) }

@@ -28,13 +28,15 @@ enum class StudyStatusFilter(val label: String) { ALL("all"), NOT_STARTED("not s
 
 data class LibraryFilters(val query: String = "", val band: Int? = null, val pos: PartOfSpeech? = null, val status: StudyStatusFilter = StudyStatusFilter.ALL)
 
-data class LibraryRow(val entry: Entry, val locked: Boolean, val status: String, val favorite: Boolean)
+/** [level] is the 0–5 mastery shown as dots; it summarises the productive card's state. */
+data class LibraryRow(val entry: Entry, val locked: Boolean, val status: String, val favorite: Boolean, val level: Int)
 
 data class EntryDetail(
     val entry: Entry,
     val locked: Boolean,
     val favorite: Boolean,
     val status: String,
+    val level: Int,
     val productive: CardState?,
     val difficult: Boolean,
 )
@@ -61,11 +63,13 @@ class LibraryViewModel(
                     StudyStatusFilter.FAVORITES -> users[entry.entryId]?.favorite == true
                 }
         }.map { entry ->
+            val card = productive[entry.entryId]
             LibraryRow(
                 entry = entry,
                 locked = !catalog.isUnlocked(entry, isPremium),
-                status = statusLabel(productive[entry.entryId]),
+                status = statusLabel(card),
                 favorite = users[entry.entryId]?.favorite == true,
+                level = masteryLevel(card),
             )
         }
     }.flowOn(Dispatchers.Default).stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
@@ -89,6 +93,7 @@ class LibraryViewModel(
             locked = !catalog.isUnlocked(entry, isPremium),
             favorite = user?.favorite == true,
             status = statusLabel(productive),
+            level = masteryLevel(productive),
             productive = productive,
             difficult = productive?.let(SrsV1::isDifficult) == true,
         )
@@ -105,6 +110,18 @@ class LibraryViewModel(
             ProgressMetrics.isMastered(card) -> "currently strong"
             card.state == CardStateType.REVIEW -> "reviewing"
             else -> "learning"
+        }
+
+        /** Five-step mastery for the dot indicator: learning steps, then growing review intervals. */
+        fun masteryLevel(card: CardState?): Int = when {
+            card == null || card.state == CardStateType.NEW || card.state == CardStateType.SUSPENDED -> 0
+            ProgressMetrics.isMastered(card) -> 5
+            card.state == CardStateType.REVIEW -> when {
+                card.intervalDays >= 7 -> 4
+                card.intervalDays >= 3 -> 3
+                else -> 2
+            }
+            else -> 1
         }
     }
 }

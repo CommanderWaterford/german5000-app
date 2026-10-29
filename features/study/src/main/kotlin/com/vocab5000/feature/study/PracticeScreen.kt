@@ -1,29 +1,43 @@
 package com.vocab5000.feature.study
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.vocab5000.core.designsystem.InfoCard
 import com.vocab5000.core.designsystem.MinTouchTarget
+import com.vocab5000.core.designsystem.OptionCard
 import com.vocab5000.core.designsystem.PrimaryAction
-import com.vocab5000.core.designsystem.ScreenTitle
+import com.vocab5000.core.designsystem.ResultHeader
 import com.vocab5000.core.designsystem.SecondaryAction
 import com.vocab5000.core.designsystem.SectionTitle
+import com.vocab5000.core.designsystem.StatChip
+import com.vocab5000.core.designsystem.partialColor
 import com.vocab5000.core.model.ChoicePrompt
 import com.vocab5000.core.model.FlashcardPrompt
 import com.vocab5000.core.model.PartOfSpeech
@@ -41,12 +55,18 @@ fun PracticeScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     DisposableEffect(Unit) { onDispose { onStopAudio() } }
-    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    FocusScaffold(title = "Practice", onBack = onExit) { padding ->
         when (val s = state) {
-            is PracticeUiState.Setup -> {
-                ScreenTitle("Practice")
-                Text("Practice uses words you have already met. It never changes your review schedule.", style = MaterialTheme.typography.bodyMedium)
-                Text("${s.introducedCount} words available", style = MaterialTheme.typography.bodySmall)
+            is PracticeUiState.Setup -> Column(
+                Modifier.padding(padding).fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                Text(
+                    "Practice uses words you have already met. It never changes your review schedule.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                StatChip("📚 ${s.introducedCount} words available", container = MaterialTheme.colorScheme.primaryContainer)
                 SectionTitle("Targeted practice")
                 if (s.premium) {
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -72,40 +92,75 @@ fun PracticeScreen(
                     }
                 }
                 SectionTitle("Choose a mode")
-                PracticeMode.entries.forEach { mode -> SecondaryAction(mode.label, onClick = { viewModel.start(mode) }) }
-                s.message?.let { Text(it, color = MaterialTheme.colorScheme.secondary) }
-                SecondaryAction("Back", onClick = onExit)
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    PracticeMode.entries.forEach { mode ->
+                        OptionCard(title = mode.label, selected = false, onClick = { viewModel.start(mode) })
+                    }
+                }
+                s.message?.let { Text(it, color = partialColor()) }
             }
-            is PracticeUiState.Running -> {
-                Text("Question ${s.index + 1} of ${s.prompts.size}", style = MaterialTheme.typography.labelLarge)
-                when (val prompt = s.current) {
-                    is TypedPrompt -> TypedPromptView(
-                        prompt = prompt,
-                        phase = s.phase,
-                        specialCharacters = specialCharacters,
-                        onPlay = onPlay,
-                        onInput = viewModel::onInput,
-                        onSubmit = viewModel::onSubmit,
-                        onHint = viewModel::onHint,
-                        onReveal = viewModel::onReveal,
-                        onOverride = {},
-                        onSelectRating = {},
-                        onContinue = viewModel::next,
-                        scheduled = false,
-                        busy = false,
-                    )
-                    is ChoicePrompt -> ChoicePromptView(prompt, s.phase, onPlay, viewModel::onChoose, viewModel::next)
-                    is FlashcardPrompt -> FlashcardView(prompt, (s.phase as? AnswerPhase.Flashcard)?.revealed == true, onPlay, viewModel::onFlip, viewModel::onFlashcardRating, busy = false)
-                    else -> Unit
+            is PracticeUiState.Running -> Column(
+                Modifier.padding(padding).fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                val answered = s.index + if (s.phase is AnswerPhase.Typing || (s.phase as? AnswerPhase.Flashcard)?.revealed == false) 0 else 1
+                LinearProgressIndicator(progress = { answered / s.prompts.size.toFloat() }, modifier = Modifier.fillMaxWidth())
+                Text(
+                    "Question ${s.index + 1} of ${s.prompts.size}",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                AnimatedContent(
+                    targetState = s.index,
+                    transitionSpec = {
+                        (slideInHorizontally(tween(300)) { it / 2 } + fadeIn(tween(300))) togetherWith fadeOut(tween(120))
+                    },
+                    label = "question",
+                ) { index ->
+                    when (val prompt = s.prompts.getOrNull(index)) {
+                        is TypedPrompt -> TypedPromptView(
+                            prompt = prompt,
+                            phase = s.phase,
+                            specialCharacters = specialCharacters,
+                            onPlay = onPlay,
+                            onInput = viewModel::onInput,
+                            onSubmit = viewModel::onSubmit,
+                            onHint = viewModel::onHint,
+                            onReveal = viewModel::onReveal,
+                            onOverride = {},
+                            onSelectRating = {},
+                            onContinue = viewModel::next,
+                            scheduled = false,
+                            busy = false,
+                        )
+                        is ChoicePrompt -> ChoicePromptView(prompt, s.phase, onPlay, viewModel::onChoose, viewModel::next)
+                        is FlashcardPrompt -> FlashcardView(prompt, (s.phase as? AnswerPhase.Flashcard)?.revealed == true, onPlay, viewModel::onFlip, viewModel::onFlashcardRating, busy = false)
+                        else -> Unit
+                    }
                 }
                 SecondaryAction("Stop practice", onClick = viewModel::restart)
             }
-            is PracticeUiState.Done -> {
-                InfoCard {
-                    Text("Practice complete", style = MaterialTheme.typography.headlineSmall)
-                    Text("${s.correct} of ${s.total} correct")
-                }
+            is PracticeUiState.Done -> Column(
+                Modifier.padding(padding).fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                ResultHeader(
+                    emoji = when {
+                        s.total > 0 && s.correct == s.total -> "🏆"
+                        s.correct * 2 >= s.total -> "🎉"
+                        else -> "💪"
+                    },
+                    title = when {
+                        s.total > 0 && s.correct == s.total -> "Perfect!"
+                        s.correct * 2 >= s.total -> "Well done!"
+                        else -> "Keep practising!"
+                    },
+                    score = "${s.correct} / ${s.total}",
+                    scoreLabel = "correct",
+                )
+                Spacer(Modifier.height(24.dp))
                 PrimaryAction("Practise again", onClick = viewModel::restart)
+                Spacer(Modifier.height(8.dp))
                 SecondaryAction("Done", onClick = onExit)
             }
         }

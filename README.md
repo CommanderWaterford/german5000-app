@@ -69,7 +69,7 @@ Signing keys are never stored in the repository; see [docs/RELEASE.md](docs/RELE
 | `core/settings` | DataStore preferences, WorkManager reminders, streaming backup export/import, clock-change detection |
 | `core/billing` | Play Billing adapter, entitlement state machine, client-side verification, acknowledgement retry |
 | `core/audio` | Packaged-audio playback with audio focus; optional on-device speech fallback |
-| `core/designsystem` | Compose theme (light/dark), accessible components, umlaut/ß input helpers |
+| `core/designsystem` | Compose theme ("Bauhaus flashcards": cobalt on warm paper, der/die/das tricolor, Bricolage Grotesque headlines; light/dark), accessible components, umlaut/ß input helpers |
 | `features/*` | Onboarding, Today, Study (sessions, practice, assessment), Library, Progress, Premium, Settings |
 | `languages/german` | German grammar rendering, answer rules (articles, `sich`, umlaut alternatives), grammar validation and exercises |
 | `tools/content-pipeline` | Builds and validates the content pack from editorial sources |
