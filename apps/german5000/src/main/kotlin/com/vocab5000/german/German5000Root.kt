@@ -87,8 +87,8 @@ private enum class TopLevel(val route: String, val label: String, val icon: Imag
     SETTINGS("settings", "Settings", Icons.Filled.Settings),
 }
 
-/** Routes that hide the navigation bar: exercises, and detail pages that carry their own back arrow. */
-private val focusRoutes = setOf("session?mode={mode}", "assessment", "practice", "entry/{id}", "premium")
+/** Routes that hide the navigation bar: exercises and the paywall, which carry their own back arrow. */
+private val focusRoutes = setOf("session?mode={mode}", "assessment", "practice", "premium")
 
 @Composable
 fun German5000Root(container: AppContainer, clockChanged: Boolean) {
